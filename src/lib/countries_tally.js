@@ -1,7 +1,7 @@
 //https://observablehq.com/@d3/learn-d3-by-example?collection=@d3/learn-d3 
 document.addEventListener("DOMContentLoaded", () => {
   GetCountries();
-})
+});
 
 function GetCountries() {
   const xhr = new XMLHttpRequest();
@@ -16,9 +16,8 @@ function GetCountries() {
     // console.log(xhr.response) //the actual response. For JSON api calls, this will be a JSON string
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
-
     graph(countries);
-
+    mapit(countries);
   };
 //debugger
   // step 4 - send off the request with optional data
@@ -123,7 +122,57 @@ function GetCountries() {
       d3.selectAll('.value')
       .remove();
     }
+    
 
   }
+  function mapit(countries){
+ // debugger
+      var width = 1000;
+      var height = 580;
+    //  debugger
+    //   // Create SVG
+      var svg = d3.select('#mapgraph')
+          .append( "svg" )
+          .attr( "width", width )
+          .attr( "height", height )
+          .attr("class", "map");
+      
+      
+      var g = svg.append( "g" );
+      var projection = d3.geoMercator()
+     .translate([width/2, height/2]);
+    
+      var data = d3.map();
+      // debugger
+      var colorScale = d3.scaleThreshold()
+      .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+      .range(d3.schemeBlues[7]);
+      
+      
+
+      countries.forEach(country => {
+        data.set(country.CountryCode, +country.TotalRecovered);
+      });
+      // function(d) { data.set(d.code, +d.pop);
+    
+      var path = d3.geoPath().projection(projection);
+      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(error, topology) {
+        //debugger 
+          g.selectAll("path")
+          .data(topology.features)
+          .enter()
+          .append("path")
+          .attr("d", path);
+          
+      });
+
+      // g.selectAll("path")
+      // .attr("fill",)
+
+  }
+  // function (d) {
+  //   d.total = data.get(d.id) || 0;
+  //   return colorScale(d.total);
+  // });
 
   

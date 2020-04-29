@@ -1,4 +1,3 @@
-import GetCountries from "./lib/countries_tally";
 import "./styles/index.scss";
 
 
