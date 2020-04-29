@@ -27,7 +27,7 @@ function GetCountries() {
 
 
   function graph(countries){
-    console.log("JELLO");
+    // console.log("JELLO");
       var svg = d3.select("#newcases"),
       margin = 80,
       width = svg.attr("width")-(3*margin),
@@ -35,8 +35,8 @@ function GetCountries() {
   // debugger
   // var svg = d3.select("svg");
 
-    var xScale = d3.scaleBand().range ([0, width]).padding(0.2);
-    var yScale = d3.scaleLinear().range ([height, 0]);
+    var xScale = d3.scaleBand().range([0, width]).padding(0.2);
+    var yScale = d3.scaleLinear().range([height, 0]);
 
     var g = svg.append("g").attr("transform", "translate(100 ,100)");
     let y =[];
@@ -88,8 +88,42 @@ function GetCountries() {
    .attr("y", 50)
    .attr("font-size", "24px")
    .text("New Confirmed Cases")
-   .attr("height", function(d) { return height - y(d.value); });
+   .attr("height", function(d) { return height ; });
    
-    // let bars = document.getElementById('bar')
+   g.selectAll(".bar")
+   .on("mouseover", onMouseOver) //Add listener for the mouseover event
+   .on("mouseleave", onMouseLeave);
+
+    function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
+      d3.select(this).attr('class', 'highlight');
+      d3.select(this)
+        .transition()
+        .duration(500)
+        .attr("width", xScale.bandwidth()+5)
+        .attr("y", function(d) { return yScale(d.NewConfirmed)-10; })
+        .attr("height", function(d) { return height - yScale(d.NewConfirmed) +10; });
+        //debugger
+      g.append("text")
+      .attr('class', 'value')
+      .attr('x', function(){return xScale(d.Country)})
+      .attr('y', function(){return yScale(d.NewConfirmed)-15;})
+      .text(function(){
+        return d.NewConfirmed;
+      });
+    }
+
+    function onMouseLeave(d, i){
+      d3.select(this).attr('class', 'bar');
+      d3.select(this)
+      .transition()
+      .duration(500)
+      .attr("width", xScale.bandwidth())
+      .attr("y", function(d) { return yScale(d.NewConfirmed); })
+      .attr("height", function(d) { return height - yScale(d.NewConfirmed); });
+      d3.selectAll('.value')
+      .remove();
+    }
 
   }
+
+  
