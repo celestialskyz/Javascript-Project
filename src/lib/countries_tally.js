@@ -19,7 +19,7 @@ function GetCountries() {
     graph(countries);
     mapit(countries);
   };
-//debugger
+////debugger
   // step 4 - send off the request with optional data
   xhr.send();
 }
@@ -31,7 +31,7 @@ function GetCountries() {
       margin = 80,
       width = svg.attr("width")-(3*margin),
       height= svg.attr("height")-(1.5*margin);
-  // debugger
+  // //debugger
   // var svg = d3.select("svg");
 
     var xScale = d3.scaleBand().range([0, width]).padding(0.2);
@@ -45,10 +45,10 @@ function GetCountries() {
     }
     });
     let dom = countries.filter(d=> { if (d.NewConfirmed> 1000) return d.NewConfirmed;});
-    // debugger
+    // //debugger
     xScale.domain(dom.map(d=> { return d.Country;}));
     yScale.domain([0, d3.max(y)]);
-    // debugger
+    // //debugger
     g.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xScale))
@@ -58,7 +58,7 @@ function GetCountries() {
     .attr("text-anchor", "end")
     .attr("stroke", "black")
     .text("Countries");
-    // debugger;
+    // //debugger;
 
     g.append("g").call(d3.axisLeft(yScale).tickFormat(function(d){
       return d;
@@ -80,7 +80,7 @@ function GetCountries() {
     .attr("y", function(d) { return yScale(d.NewConfirmed); })
     .attr("width", xScale.bandwidth())
     .attr("height", function(d) { return height - yScale(d.NewConfirmed); });
-    // debugger
+    // //debugger
     svg.append("text")
    .attr("transform", "translate(100,0)")
    .attr("x", 50)
@@ -101,7 +101,7 @@ function GetCountries() {
         .attr("width", xScale.bandwidth()+5)
         .attr("y", function(d) { return yScale(d.NewConfirmed)-10; })
         .attr("height", function(d) { return height - yScale(d.NewConfirmed) +10; });
-        //debugger
+        ////debugger
       g.append("text")
       .attr('class', 'value')
       .attr('x', function(){return xScale(d.Country)})
@@ -126,10 +126,10 @@ function GetCountries() {
 
   }
   function mapit(countries){
- // debugger
+ // //debugger
       var width = 1000;
       var height = 580;
-    //  debugger
+    //  //debugger
     //   // Create SVG
       var svg = d3.select('#mapgraph')
           .append( "svg" )
@@ -143,7 +143,7 @@ function GetCountries() {
      .translate([width/2, height/2]);
     
       var data = d3.map();
-      // debugger
+      // //debugger
       var colorScale = d3.scaleThreshold()
       .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
       .range(d3.schemeBlues[7]);
@@ -157,7 +157,7 @@ function GetCountries() {
     
       var path = d3.geoPath().projection(projection);
       d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(error, topology) {
-        //debugger 
+        ////debugger 
           g.selectAll("path")
           .data(topology.features)
           .enter()

@@ -1,10 +1,10 @@
-console.log("JELLO");
+//console.log("JELLO");
 
 document.addEventListener("DOMContentLoaded", () => {
    
 var select = document.getElementById("cat1");  
 
-var options = ["NewConfirmed","NewDeaths", "TotalDeaths", "NewRecovered", "TotalRecovered" ]; 
+var options = ["NewConfirmed","TotalConfirmed","NewDeaths", "TotalDeaths", "NewRecovered", "TotalRecovered" ]; 
   for (var i = 0; i < options.length; i++) {
       var opt = options[i];
       var el = document.createElement("option");
@@ -13,12 +13,12 @@ var options = ["NewConfirmed","NewDeaths", "TotalDeaths", "NewRecovered", "Total
       select.appendChild(el);}
 
  var s = document.getElementById("cat2");  
- //debugger
+ ////debugger
   for (var i2 = 0; i2 < options.length; i2++) {
       var opt2 = options[i2];
       var el2 = document.createElement("option");
       el2.textContent = opt2;
-    //  debugger
+    //  //debugger
       el2.value = opt2;
       s.appendChild(el2);}
 
