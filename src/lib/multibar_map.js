@@ -15,7 +15,7 @@ function multiCountries() {
     // console.log(xhr.response) //the actual response. For JSON api calls, this will be a JSON string
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
-    makebarsg(countries)
+    makebarsg(countries);
   };
 //debugger
   // step 4 - send off the request with optional data
@@ -23,29 +23,87 @@ function multiCountries() {
 }
 
 function makebarsg(countries){
+  var select = document.getElementById("cat1"); 
+  var options = ["NewConfirmed","NewDeaths", "TotalDeaths", "NewRecovered", "TotalRecovered" ]; 
+  
+  for (var i = 0; i < options.length; i++) {
+      var opt = options[i];
+      var el = document.createElement("option");
+      el.textContent = opt;
+      el.value = opt;
+      select.appendChild(el);}
+
+  console.log(document.getElementById("cat2").value);
+
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(3*margin.left + margin.right),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
 
-  var xScale = d3.scaleBand().rangeRound([0, width]).padding(0.2);
-  var subcatsX = d3.scale.ordinal();
+  var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
+  var subcatsX = d3.scaleBand();
   var yScale = d3.scaleLinear().range([height, 0]);
 
-  var xAxis = d3.svg.axis()
-  .scale(xScale)
-  .tickSize(0)
-  .orient("bottom");
-  //d3.axisBottom(xScale)
-  var yAxis = d3.svg.axis()
-  .scale(yScale)
-  .orient("left");
+  var color = d3.scaleOrdinal()
+  .range(["#750d0a","#00c50a","#79d3bc"]);
 
-  let subs = [];
-  let subcats = countries.slice();
-  subcats.forEach(element => {
-      { element.TotalConfirmed, element.NewRecovered, element.TotalRecovered }
-  });
-  debugger
+  var xAxis = d3.axisBottom(xScale)
+  .tickSize(0);
+  //d3.axisBottom(xScale)
+  var yAxis = d3.axisLeft(yScale);
+
+  // let subcats = new Object();
+  let subcatsnames = ["TotalConfirmed","NewRecovered", "TotalRecovered"];
+
+  // debugger
+  let y =[];
+    countries.forEach(c => {
+      if (c.NewConfirmed>1000) {
+     y.push(c.TotalConfirmed);
+     y.push(c.NewRecovered);
+     y.push(c.TotalRecovered);}
+    });
+    
+      countries.forEach(c => {
+      c.subs =[{name:"TotalConfirmed", value: c.TotalConfirmed}, {name:"NewRecovered", value: c.NewRecovered},{name: "TotalRecovered", value:c.TotalRecovered}] 
+    })
+    let dom = countries.filter(d=> { if (d.NewConfirmed> 1000) return d.NewConfirmed;});
   
-}
+  xScale.domain(dom.map(d=> { return d.Country;}));
+  subcatsX.domain(subcatsnames).rangeRound([0, xScale.bandwidth()]);
+  yScale.domain([0, d3.max(y)]);
+  //var g = svg.append("g").attr("transform", "translate(100 ,0)");
+    var g = svg.append("g");
+    g.append("g")
+      .attr("class", "xaxis")
+      .attr("transform", "translate(10," + height + ")")
+      .call(xAxis);
+
+    g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.format(".2s"))
+    .ticks(15))
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 1)
+    .attr("dy", "-5.1em")
+    .attr("dx", "-19.1em")
+    .attr("text-anchor", "end")
+    .attr("stroke", "black")
+    .text("Number of Cases");
+
+    svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
+
+    var subsection = svg.selectAll(".subsection")
+      .data(dom)
+      .enter().append("g")
+      .attr("class", "g")
+      .attr("transform",function(d) { return "translate(" + xScale(d.Country) + ",0)"; });
+
+      subsection.selectAll("rect")
+      .data(function(c) {return c.subs;})
+      .enter().append("rect")
+      .attr("width", subcatsX.bandwidth())
+      .attr("x", function(c) { return subcatsX(c.name);})
+      .attr("y", function(c) {return yScale(c.value);})
+      .attr("height", function(c){return height-yScale(c.value)})
+      .style("fill", function(c){return color(c.name)})
+ }

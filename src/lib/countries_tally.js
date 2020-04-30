@@ -1,7 +1,7 @@
 //https://observablehq.com/@d3/learn-d3-by-example?collection=@d3/learn-d3 
-document.addEventListener("DOMContentLoaded", () => {
-  GetCountries();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   GetCountries();
+// });
 
 function GetCountries() {
   const xhr = new XMLHttpRequest();
