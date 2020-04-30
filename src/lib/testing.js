@@ -1,15 +1,8 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   multiCountries();
-// });
-document.getElementById('buttt').addEventListener('click', function (e) {
-e.preventDefault();
-  let input1 = document.getElementById("cat1").value;
-  let input2 = document.getElementById("cat2").value;
-  debugger
-    multiCountries(input1, input2);
-});
+document.addEventListener("DOMContentLoaded", () => {
+  multiCountries();
+  });
 
-function multiCountries(cat1, cat2) {
+function multiCountries() {
   const xhr = new XMLHttpRequest();
 
   // step 2 - specify path and verb
@@ -17,16 +10,20 @@ function multiCountries(cat1, cat2) {
 
   // step 3 - register a callback
   xhr.onload = function () {
+    // console.log(xhr.status); //  for status info
+    // console.log(xhr.responseType); //the type of data that was returned
+    // console.log(xhr.response) //the actual response. For JSON api calls, this will be a JSON string
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
-    makebarsg(countries, cat1, cat2);
+    makebarsg(countries);
   };
 //debugger
   // step 4 - send off the request with optional data
   xhr.send();
 }
 
-function makebarsg(countries, cat1, cat2){
+function makebarsg(countries){
+ // debugger
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(3*margin.left + margin.right),
@@ -36,34 +33,33 @@ function makebarsg(countries, cat1, cat2){
   var subcatsX = d3.scaleBand();
   var yScale = d3.scaleLinear().range([height, 0]);
 
-  var color = d3.scaleOrdinal()
-  .range(["#00c50a","#79d3bc"]);
+  var color = d3.scaleOrdinal().range(["#002ec5","#008f99"]);
+  // .range(["#002ec5","#00c50a","#69e0e9"]);
 
   var xAxis = d3.axisBottom(xScale)
   .tickSize(0);
   //d3.axisBottom(xScale)
   var yAxis = d3.axisLeft(yScale);
 
-  // let subcats = new Object();
+  let subcatsnames = ["NewRecovered", "TotalRecovered"];
   // let subcatsnames = ["TotalConfirmed","NewRecovered", "TotalRecovered"];
-   let subcatsnames = [cat1, cat2];
 
-  //debugger
+  // debugger
   let y =[];
     countries.forEach(c => {
       if (c.NewConfirmed>1000) {
-     y.push(c[`${cat1}`]);
-     //debugger
-     y.push(c[`${cat2}`]);}
+     //y.push(c.TotalConfirmed);
+     y.push(c.NewRecovered);
+     y.push(c.TotalRecovered);}
     });
     
       countries.forEach(c => {
-      c.subs =[{name:cat1, value: c[`${cat1}`]}, {name:cat1, value: c[`${cat2}`]}] 
-        //debugger
+      //c.subs =[{name:"TotalConfirmed", value: c.TotalConfirmed}, {name:"NewRecovered", value: c.NewRecovered},{name: "TotalRecovered", value:c.TotalRecovered}] 
+      c.subs =[{name:"NewRecovered", value: c.NewRecovered},{name: "TotalRecovered", value:c.TotalRecovered}] 
+
     })
-    //debugger
     let dom = countries.filter(d=> { if (d.NewConfirmed> 1000) return d.NewConfirmed;});
-    debugger
+  
   xScale.domain(dom.map(d=> { return d.Country;}));
   subcatsX.domain(subcatsnames).rangeRound([0, xScale.bandwidth()]);
   yScale.domain([0, d3.max(y)]);
@@ -91,17 +87,15 @@ function makebarsg(countries, cat1, cat2){
       .data(dom)
       .enter().append("g")
       .attr("class", "g")
-      .attr("transform",function(d) { debugger
-        return "translate(" + xScale(d.Country) + ",0)"; });
+      .attr("transform",function(d) { return "translate(" + xScale(d.Country) + ",0)"; });
 
       subsection.selectAll("rect")
-      .data(function(c) {//debugger 
-        return c.subs;})
+        .data(function(c) {return c.subs;})
       .enter().append("rect")
-      .attr("width", subcatsX.bandwidth())
-      .attr("x", function(c) { return subcatsX(c.name);})
-      .attr("y", function(c) {return yScale(c.value);})
-      .attr("height", function(c){return height-yScale(c.value)})
-      .style("fill", function(c){ debugger 
-        return color(c.name)})
- }
+        .attr("width", subcatsX.bandwidth())
+        .attr("x", function(c) { return subcatsX(c.name);})
+        .attr("y", function(c) {return yScale(c.value);})
+        .attr("height", function(c){return height-yScale(c.value);})
+        .style("fill", function(c){//debugger 
+          return color(c.name);});
+  }
