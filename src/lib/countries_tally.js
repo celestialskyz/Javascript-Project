@@ -45,6 +45,8 @@ function GetCountries() {
     });
     let dom = countries.filter(d=> { if (d.NewConfirmed> 1000) return d.NewConfirmed;});
     // //debugger
+  
+
     xScale.domain(dom.map(d=> { return d.Country;}));
     yScale.domain([0, d3.max(y)]);
     // //debugger
@@ -80,13 +82,13 @@ function GetCountries() {
     .attr("width", xScale.bandwidth())
     .attr("height", function(d) { return height - yScale(d.NewConfirmed); });
     // //debugger
-    svg.append("text")
-   .attr("transform", "translate(100,0)")
-   .attr("x", 50)
-   .attr("y", 50)
-   .attr("font-size", "24px")
-   .text("New Confirmed Cases")
-   .attr("height", function(d) { return height ; });
+  //   svg.append("text")
+  //  .attr("transform", "translate(100,0)")
+  //  .attr("x", 50)
+  //  .attr("y", 50)
+  //  .attr("font-size", "24px")
+  //  .text("New Confirmed Cases")
+  //  .attr("height", function(d) { return height ; });
    
    g.selectAll(".bar")
    .on("mouseover", onMouseOver) //Add listener for the mouseover event

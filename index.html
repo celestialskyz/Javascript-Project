@@ -13,15 +13,36 @@
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
+    <link rel="stylesheet"
+       href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky">
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Stylish">
+
+      <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Comfortaa">
+
         <title>Corona</title>
   </head>
   <body>
+    <div class = "tiptop">
+      <div class = content>
+        <h1>Is It Over Yet?</h1>
+        <div>
+            With Corona Virus(Covid-19) taking over the news and causing a global pandemic. The given statistics can help you track cases, get quarantine activity suggestions and decide when we can come out of hiding.
+        </div>
+      </div>
+      <!-- <img class = "firstimg" src = "./dist//images/ICON583.jpg" alt="header"> -->
+    </div>
+    
     <div id="histogram">
       <svg id = "newcases" width="1500" height="600"> </svg>
           <script src = "src/lib/countries_tally.js" charset="utf-8"> </script>
     </div>
+
+
 <div class = "Facts">
-  <label> Fun Things to do Quarentine
+   <label> Fun Things to do in Quarentine </label>
+  <img src = "./dist/images/bearscovid.jpg">
   <p>
     <ul>
       <li>Make a Fort & have a movie night</li>
@@ -31,22 +52,26 @@
       <li>Teach Your Pet a New Trick</li>
     </ul>
   </p>
-</label>
+
 </div>
 
     <div id="2ndhistogram">
-    <form id = "compareform">
-      <label> 
-        Select Categories for comparison:
-        <select id = "cat1" name="category" class="cat-drop" default = "NewRecovered"}>
-        </select>
-        <select id = "cat2" name="category2" class="cat-drop" default = "TotalRecovered"}>
-        </select>
-        </label>
-        <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script>
-        <button id = "buttt" type="submit">Enter</button>
-    </form> 
-    <div class = "outsite"></div>
+            
+      <form id = "compareform">  <img class = "bun" src = "./dist/images/covidBunny.jpg">
+        <label> 
+          <h3>Create a Graph</h3>
+          <h2>Select Categories for comparison:</h2>
+          <div class = "pick">
+          <select id = "cat1" name="category" class="cat-drop" default = "NewRecovered"}>
+          </select>
+          <select id = "cat2" name="category2" class="cat-drop" default = "TotalRecovered"}>
+          </select>
+          </div>
+          </label>
+          <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script>
+          <button id = "buttt" type="submit">Enter</button>
+      </form> 
+     <div class = "outsite"></div>
       <!-- <script src = "src/lib/testing.js" charset="utf-8"> </script> -->
       <script src = "src/lib/multibar_map.js" charset="utf-8"> </script>
        <!-- <svg id = "comparecases" width="1500" height="600"> </svg></div> -->
