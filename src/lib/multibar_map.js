@@ -4,7 +4,7 @@
 document.getElementById('buttt').addEventListener('click', function (e) {
 e.preventDefault();
   d3.selectAll('.show').remove();
-  d3.select('outsite').append('svg').attr("id", "comparecases");
+  debugger
   let input1 = document.getElementById("cat1").value;
   let input2 = document.getElementById("cat2").value;
   
@@ -29,12 +29,14 @@ function multiCountries(cat1, cat2) {
 }
 
 function makebarsg(countries, cat1, cat2){
-  
+  debugger
+
+  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
-
+debugger
   svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
