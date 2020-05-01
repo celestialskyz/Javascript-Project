@@ -44,6 +44,8 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
               name: "[name].[ext]",
               outputPath: "images/",
               publicPath: "images/"
@@ -57,6 +59,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
               publicPath: "../",
               hmr: process.env.NODE_ENV === "development"
             }
