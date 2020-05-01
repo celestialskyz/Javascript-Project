@@ -1,7 +1,7 @@
 //https://observablehq.com/@d3/learn-d3-by-example?collection=@d3/learn-d3 
-// document.addEventListener("DOMContentLoaded", () => {
-//   GetCountries();
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  GetCountries();
+});
 
 function GetCountries() {
   const xhr = new XMLHttpRequest();
@@ -17,13 +17,12 @@ function GetCountries() {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
     graph(countries);
-    mapit(countries);
+    //mapit(countries);
   };
 ////debugger
   // step 4 - send off the request with optional data
   xhr.send();
 }
-
 
   function graph(countries){
     // console.log("JELLO");
@@ -104,7 +103,7 @@ function GetCountries() {
         ////debugger
       g.append("text")
       .attr('class', 'value')
-      .attr('x', function(){return xScale(d.Country)})
+      .attr('x', function(){return xScale(d.Country)+20})
       .attr('y', function(){return yScale(d.NewConfirmed)-15;})
       .text(function(){
         return d.NewConfirmed;

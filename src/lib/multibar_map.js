@@ -3,11 +3,11 @@
 // });
 document.getElementById('buttt').addEventListener('click', function (e) {
 e.preventDefault();
+// d3.selectAll('.show').remove();
   let input1 = document.getElementById("cat1").value;
   let input2 = document.getElementById("cat2").value;
-  d3.selectAll('.show')
-    .remove();
-    multiCountries(input1, input2);
+  
+  multiCountries(input1, input2);
 });
 
 function multiCountries(cat1, cat2) {
@@ -28,10 +28,13 @@ function multiCountries(cat1, cat2) {
 }
 
 function makebarsg(countries, cat1, cat2){
+  
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
+
+  //svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
   var subcatsX = d3.scaleBand();
@@ -69,7 +72,7 @@ function makebarsg(countries, cat1, cat2){
   subcatsX.domain(subcatsnames).rangeRound([20, xScale.bandwidth()]);
   yScale.domain([0, d3.max(y)]);
   //var g = svg.append("g").attr("transform", "translate(100 ,0)");
-    var g = svg.append("g").attr('class', 'show');
+    var g = svg.append("g");
     g.append("g")
       .attr("class", "xaxis")
       .attr("transform", "translate(20," + height + ")")

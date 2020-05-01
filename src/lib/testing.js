@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
-  getCountries();
-  });
+// document.addEventListener("DOMContentLoaded", () => {
+//   getCountries();
+//   });
   // document.getElementById('buttt').addEventListener('click', function (e) {
   //   e.preventDefault();
   //   d3.selectAll('.show')
