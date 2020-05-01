@@ -65,9 +65,9 @@ function makebarsg(countries, cat1, cat2){
     });
     
       countries.forEach(c => {
-      c.subs =[{name:cat1, value: c[`${cat1}`]}, {name:cat2, value: c[`${cat2}`]}] 
+      c.subs =[{name:cat1, value: c[`${cat1}`]}, {name:cat2, value: c[`${cat2}`]}]; 
         ////debugger
-    })
+    });
     ////debugger
     let dom = countries.filter(d=> { if (d.NewConfirmed> 2000) return d.NewConfirmed;});
     //debugger
@@ -108,9 +108,9 @@ function makebarsg(countries, cat1, cat2){
       .attr("width", subcatsX.bandwidth())
       .attr("x", function(c) { return subcatsX(c.name);})
       .attr("y", function(c) {return yScale(c.value);})
-      .attr("height", function(c){return height-yScale(c.value)})
+      .attr("height", function(c){return height-yScale(c.value);})
       .style("fill", function(c){ //debugger 
-        return color(c.name)})
+        return color(c.name);});
 
 
         // g.selectAll("rect")
@@ -158,11 +158,11 @@ function makebarsg(countries, cat1, cat2){
           .attr("width", 150)
           .attr("height", 18)
           .style("fill", color)
-          .style("opacity", .7);
+          .style("opacity", 0.7);
 
         legend.append("text")
           .attr("x", width-30)
           .attr("y", 9)
           .attr("dy", ".35em")
-          .text(function(d){return d;})
+          .text(function(d){return d;});
  }
