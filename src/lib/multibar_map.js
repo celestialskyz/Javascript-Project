@@ -3,7 +3,8 @@
 // });
 document.getElementById('buttt').addEventListener('click', function (e) {
 e.preventDefault();
-// d3.selectAll('.show').remove();
+  d3.selectAll('.show').remove();
+  d3.select('outsite').append('svg').attr("id", "comparecases");
   let input1 = document.getElementById("cat1").value;
   let input2 = document.getElementById("cat2").value;
   
@@ -34,7 +35,7 @@ function makebarsg(countries, cat1, cat2){
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
 
-  //svg.attr('class', 'show');
+  svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
   var subcatsX = d3.scaleBand();
@@ -80,7 +81,7 @@ function makebarsg(countries, cat1, cat2){
 
     g.append("g").attr("class", "y axis")
     .call(d3.axisLeft(yScale).tickFormat(d3.format(".2s"))
-    .ticks(15)).attr("transform", "translate(40,0)")
+    .ticks(15)).attr("transform", "translate(50,0)")
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 1)
@@ -108,4 +109,22 @@ function makebarsg(countries, cat1, cat2){
       .attr("height", function(c){return height-yScale(c.value)})
       .style("fill", function(c){ //debugger 
         return color(c.name)})
+
+      var legend = svg.selectAll(".legend")
+        .data(subcatsnames.slice().reverse())
+        .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+        legend.append("rect")
+          .attr("x", width-20)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", color);
+
+        legend.append("text")
+          .attr("x", width-1)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .text(function(d){return d;})
  }

@@ -1,6 +1,6 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   getCountries();
-//   });
+document.addEventListener("DOMContentLoaded", () => {
+  getCountries();
+  });
   // document.getElementById('buttt').addEventListener('click', function (e) {
   //   e.preventDefault();
   //   d3.selectAll('.show')
@@ -96,7 +96,7 @@ function makebarsg(countries){
       .attr("transform",function(d) { return "translate(" + xScale(d.Country) + ",0)"; });
 
       subsection.selectAll("rect")
-        .data(function(c) { debugger 
+        .data(function(c) {//debugger 
           return c.subs;})
       .enter().append("rect")
         .attr("width", subcatsX.bandwidth())
