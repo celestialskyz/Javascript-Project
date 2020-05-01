@@ -4,7 +4,7 @@
 document.getElementById('buttt').addEventListener('click', function (e) {
 e.preventDefault();
   d3.selectAll('.show').remove();
-  debugger
+  //debugger
   let input1 = document.getElementById("cat1").value;
   let input2 = document.getElementById("cat2").value;
   
@@ -29,14 +29,14 @@ function multiCountries(cat1, cat2) {
 }
 
 function makebarsg(countries, cat1, cat2){
-  debugger
+  //debugger
 
   d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
-debugger
+//debugger
   svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
@@ -87,7 +87,7 @@ debugger
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 1)
-    .attr("dy", "-5.1em")
+    .attr("dy", "-4.1em")
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
     .attr("stroke", "black")
@@ -112,6 +112,41 @@ debugger
       .style("fill", function(c){ //debugger 
         return color(c.name)})
 
+
+        // g.selectAll("rect")
+        // .on("mouseover", onMouseOver) //Add listener for the mouseover event
+        // .on("mouseleave", onMouseLeave);
+
+        // function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
+        //   d3.select(this).attr('class', 'highlight');
+        //   d3.select(this)
+        //     .transition()
+        //     .duration(500)
+        //     .attr("width", subcatsX.bandwidth()+5)
+        //     .attr("y", function(d) { return subcatsX(d.value)-10;})
+        //     .attr("height", function(d) { return height-yScale(d.value) +10})
+        //   .append("text")
+        //   .attr('class', 'value')
+        //   .attr('x', function(){return subcatsX(d.name)+20;})
+        //   .attr('y', function(){return yScale(d.name)-15;})
+        //   .text(function(){
+        //     return d.NewConfirmed;
+        //   });
+        // }
+
+        // function onMouseLeave(d, i){
+        //   d3.select(this).attr('class', 'bar');
+        //   d3.select(this)
+        //   .transition()
+        //   .duration(500)
+        //   .attr("width", subcatsX.bandwidth())
+        //   .attr("x", function(c) { return subcatsX(c.name);})
+        //   .attr("y", function(c) {return yScale(c.value);})
+        //   .attr("height", function(c){return height-yScale(c.value)})
+        //   d3.selectAll('.value')
+        //   .remove();
+        // }
+
       var legend = svg.selectAll(".legend")
         .data(subcatsnames.slice().reverse())
         .enter().append("g")
@@ -119,13 +154,14 @@ debugger
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
         legend.append("rect")
-          .attr("x", width-20)
-          .attr("width", 18)
+          .attr("x", width-30)
+          .attr("width", 150)
           .attr("height", 18)
-          .style("fill", color);
+          .style("fill", color)
+          .style("opacity", .7);
 
         legend.append("text")
-          .attr("x", width-1)
+          .attr("x", width-30)
           .attr("y", 9)
           .attr("dy", ".35em")
           .text(function(d){return d;})

@@ -1,6 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-  getCountries();
-  });
+// document.addEventListener("DOMContentLoaded", () => {
+//   getCountries();
+//   });
+
+// window.addEventListener('load', (event) => {getCountries();
+//     });
+
   // document.getElementById('buttt').addEventListener('click', function (e) {
   //   e.preventDefault();
   //   d3.selectAll('.show')
@@ -29,17 +33,21 @@ function getCountries() {
 
 function makebarsg(countries){
  // //debugger
+ d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
+  debugger
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 40, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
+  
+  svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
   var subcatsX = d3.scaleBand();
   var yScale = d3.scaleLinear().range([height, 10]);
 
   var color = d3.scaleOrdinal().range(["#002ec5","#2ed0db"]);
-  // .range(["#002ec5","#00c50a","#69e0e9"]);
+  
 
   var xAxis = d3.axisBottom(xScale)
   .tickSize(0);
@@ -77,7 +85,7 @@ function makebarsg(countries){
 
     g.append("g").attr("class", "y axis")
     .call(d3.axisLeft(yScale).tickFormat(d3.format(".2s"))
-    .ticks(15)).attr("transform", "translate(28,0)")
+    .ticks(15)).attr("transform", "translate(28,0)") //number changes
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 18)
