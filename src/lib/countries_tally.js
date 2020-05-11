@@ -17,6 +17,7 @@ function GetCountries() {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
     graph(countries);
+    
     //mapit(countries);
   };
 ////debugger
@@ -38,15 +39,19 @@ function GetCountries() {
 
     var g = svg.append("g").attr("transform", "translate(100 ,100)");
     let y =[];
-    countries.forEach(c => {
-      if (c.NewConfirmed>1000) {
-     y.push(c.NewConfirmed);
+    dom = [];
+    while (dom.length<8 ){
+      let randCon = countries[Math.floor(Math.random() * countries.length)]
+      if (randCon.NewConfirmed != 0){
+        dom.push(randCon);
+      }
     }
+    dom.forEach(c => {
+      y.push(Math.log(c.NewConfirmed));
     });
-    let dom = countries.filter(d=> { if (d.NewConfirmed> 1000) return d.NewConfirmed;});
-    // //debugger
-  
 
+    //debugger
+  
     xScale.domain(dom.map(d=> { return d.Country;}));
     yScale.domain([0, d3.max(y)]);
     // //debugger
@@ -71,16 +76,16 @@ function GetCountries() {
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
     .attr("stroke", "black")
-    .text("Number of Cases");
+    .text("Log Number of Cases");
 
     g.selectAll(".bar")
     .data(dom)
     .enter().append("rect")
     .attr("class", "bar")
     .attr("x", function(d) { return xScale(d.Country); })
-    .attr("y", function(d) { return yScale(d.NewConfirmed); })
+    .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4)); })
     .attr("width", xScale.bandwidth())
-    .attr("height", function(d) { return height - yScale(d.NewConfirmed); });
+    .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)); });
     // //debugger
   //   svg.append("text")
   //  .attr("transform", "translate(100,0)")
@@ -92,7 +97,7 @@ function GetCountries() {
    
    g.selectAll(".bar")
    .on("mouseover", onMouseOver) //Add listener for the mouseover event
-   .on("mouseleave", onMouseLeave);
+ .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
       d3.select(this).attr('class', 'highlight');
@@ -100,26 +105,26 @@ function GetCountries() {
         .transition()
         .duration(500)
         .attr("width", xScale.bandwidth()+5)
-        .attr("y", function(d) { return yScale(d.NewConfirmed)-10; })
-        .attr("height", function(d) { return height - yScale(d.NewConfirmed) +10; });
-        ////debugger
+        .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4))-10; })
+        .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)) +10; });
+     //  debugger
       g.append("text")
       .attr('class', 'value')
       .attr('x', function(){return xScale(d.Country)+20})
-      .attr('y', function(){return yScale(d.NewConfirmed)-15;})
+      .attr('y', function(){return yScale(Math.log(d.NewConfirmed).toFixed(4))-15;})
       .text(function(){
-        return d.NewConfirmed;
+        return Math.log(d.NewConfirmed).toFixed(4);
       });
     }
-
+//debugger
     function onMouseLeave(d, i){
       d3.select(this).attr('class', 'bar');
       d3.select(this)
       .transition()
       .duration(500)
       .attr("width", xScale.bandwidth())
-      .attr("y", function(d) { return yScale(d.NewConfirmed); })
-      .attr("height", function(d) { return height - yScale(d.NewConfirmed); });
+      .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4)); })
+      .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)); });
       d3.selectAll('.value')
       .remove();
     }
@@ -147,7 +152,7 @@ function GetCountries() {
       // //debugger
       var colorScale = d3.scaleThreshold()
       .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-      .range(d3.schemeBlues[7]);
+      .range(d3.schemeBlues[8]);
       
       
 
