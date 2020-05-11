@@ -97,7 +97,7 @@ function GetCountries() {
    
    g.selectAll(".bar")
    .on("mouseover", onMouseOver) //Add listener for the mouseover event
-   .on("mouseleave", onMouseLeave);
+ .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
       d3.select(this).attr('class', 'highlight');
@@ -107,7 +107,7 @@ function GetCountries() {
         .attr("width", xScale.bandwidth()+5)
         .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4))-10; })
         .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)) +10; });
-        ////debugger
+     //  debugger
       g.append("text")
       .attr('class', 'value')
       .attr('x', function(){return xScale(d.Country)+20})
@@ -116,7 +116,7 @@ function GetCountries() {
         return Math.log(d.NewConfirmed).toFixed(4);
       });
     }
-
+//debugger
     function onMouseLeave(d, i){
       d3.select(this).attr('class', 'bar');
       d3.select(this)

@@ -70,14 +70,14 @@ function makebarsg(countries, cat1, cat2){
     }
 //debugger
     dom.forEach(c => {
-      y.push(Math.log(c[`${cat1}`]));
+      y.push(Math.log(c[`${cat1}`])).toFixed(4);
       ////debugger
-      y.push(Math.log(c[`${cat2}`]));}
+      y.push(Math.log(c[`${cat2}`])).toFixed(4);}
      );
      
      dom.forEach(c => {
-       let logsC1 = (Math.log(c[`${cat1}`]));
-       let logsC2 = (Math.log(c[`${cat2}`]));
+       let logsC1 = (Math.log(c[`${cat1}`])).toFixed(4);
+       let logsC2 = (Math.log(c[`${cat2}`])).toFixed(4);
       //  if(logsC1 === Infinity){
       //    logsC1 = "None";
       //  }
@@ -136,11 +136,12 @@ function makebarsg(countries, cat1, cat2){
         return color(c.name);});
 
 
-        g.selectAll("rect")
+        subsection.selectAll("rect")
         .on("mouseover", onMouseOver) //Add listener for the mouseover event
-       .on("mouseleave", onMouseLeave);
+        .on("mouseleave", onMouseLeave);
 
-        function onMouseOver(d, i){ debugger//d is the info ex: country etc & i is if its the 1st or 2nd ...
+        function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
+        let dd= d3.select(this);
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -148,28 +149,34 @@ function makebarsg(countries, cat1, cat2){
             .attr("width", subcatsX.bandwidth()+5)
             .attr("y", function(d) { 
               return yScale(d.value)-10;})
-            .attr("height", function(d) { return height-yScale(d.value) +10})
-          .append("text")
+            .attr("height", function(d) { 
+              return height-yScale(d.value) +10;});
+         debugger
+         g.append("text")
           .attr('class', 'value')
-          .attr('x', function(){return subcatsX(d.name)+20;})
-          .attr('y', function(){return yScale(d.name)-15;})
+          .attr('x', function(){ 
+            debugger/// subcats is grabbing 1st of category but not via the country
+            return subcatsX(g.name)+20;})
+          .attr('y', function(){//debugger
+            return yScale(d.value)-15;})
           .text(function(){
+          //  debugger
             return d.value;
           });
         }
 
-        // function onMouseLeave(d, i){
-        //   d3.select(this).attr('class', 'bar');
-        //   d3.select(this)
-        //   .transition()
-        //   .duration(500)
-        //   .attr("width", subcatsX.bandwidth())
-        //   .attr("x", function(c) { return subcatsX(c.name);})
-        //   .attr("y", function(c) {return yScale(c.value);})
-        //   .attr("height", function(c){return height-yScale(c.value)})
-        //   d3.selectAll('.value')
-        //   .remove();
-        // }
+        function onMouseLeave(d, i){
+          d3.select(this).attr('class', 'bar');
+          d3.select(this)
+          .transition()
+          .duration(500)
+          .attr("width", subcatsX.bandwidth())
+          .attr("x", function(c) { return subcatsX(c.name);})
+          .attr("y", function(c) {return yScale(c.value);})
+          .attr("height", function(c){return height-yScale(c.value)})
+          d3.selectAll('.value')
+          .remove();
+        }
         //debugger
       var legend = svg.selectAll(".legend")
         .data(subcatsnames.slice().reverse())
