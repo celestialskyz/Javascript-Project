@@ -57,24 +57,46 @@ function makebarsg(countries, cat1, cat2){
 
   ////debugger
   let y =[];
-    countries.forEach(c => {
-      if (c.NewConfirmed>2000) {
-     y.push(c[`${cat1}`]);
      ////debugger
-     y.push(c[`${cat2}`]);}
-    });
-    
-      countries.forEach(c => {
-      c.subs =[{name:cat1, value: c[`${cat1}`]}, {name:cat2, value: c[`${cat2}`]}]; 
-        ////debugger
-    });
-    ////debugger
-    let dom = countries.filter(d=> { if (d.NewConfirmed> 2000) return d.NewConfirmed;});
+    //let dom = countries.filter(d=> { if (d.NewConfirmed> 2000) return d.NewConfirmed;});
     //debugger
+    let dom =[];
+    while (dom.length<8 ){
+      let randCon = countries[Math.floor(Math.random() * countries.length)];
+       if (randCon[`${cat1}`] !=0 && randCon[`${cat2}`] !=0 ){
+         dom.push(randCon);
+       }
+      
+    }
+//debugger
+    dom.forEach(c => {
+      y.push(Math.log(c[`${cat1}`]));
+      ////debugger
+      y.push(Math.log(c[`${cat2}`]));}
+     );
+     
+     dom.forEach(c => {
+       let logsC1 = (Math.log(c[`${cat1}`]));
+       let logsC2 = (Math.log(c[`${cat2}`]));
+      //  if(logsC1 === Infinity){
+      //    logsC1 = "None";
+      //  }
+      //  if(logsC2 === Infinity){
+      //   logsC2 = "None";
+      // }
+       c.subs =[{name:cat1, value: logsC1
+        //Math.log(c[`${cat1}`])
+      },
+        {name:cat2, value: logsC2 }];
+          // Math.log(c[`${cat2}`])}]; 
+         ////debugger
+     });
+
   xScale.domain(dom.map(d=> { return d.Country;}));
-  subcatsX.domain(subcatsnames).rangeRound([20, xScale.bandwidth()]);
+  subcatsX.domain(subcatsnames).range([0, xScale.bandwidth()]);
   yScale.domain([0, d3.max(y)]);
   //var g = svg.append("g").attr("transform", "translate(100 ,0)");
+  
     var g = svg.append("g");
     g.append("g")
       .attr("class", "xaxis")
@@ -91,48 +113,50 @@ function makebarsg(countries, cat1, cat2){
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
     .attr("stroke", "black")
-    .text("Number of Cases");
+    .text("Log Number of Cases");
 
     svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
-
+// debugger
     var subsection = svg.selectAll(".subsection")
       .data(dom)
       .enter().append("g")
       .attr("class", "g")
       .attr("transform",function(d) { return "translate(" + xScale(d.Country) + ",0)"; });
-
+      
       subsection.selectAll("rect")
-      .data(function(c) {//debugger 
+      .data(function(c) { 
         return c.subs;})
       .enter().append("rect")
       .attr("width", subcatsX.bandwidth())
-      .attr("x", function(c) { return subcatsX(c.name);})
+      .attr("x", function(c) {
+         return subcatsX(c.name);})
       .attr("y", function(c) {return yScale(c.value);})
       .attr("height", function(c){return height-yScale(c.value);})
       .style("fill", function(c){ //debugger 
         return color(c.name);});
 
 
-        // g.selectAll("rect")
-        // .on("mouseover", onMouseOver) //Add listener for the mouseover event
-        // .on("mouseleave", onMouseLeave);
+        g.selectAll("rect")
+        .on("mouseover", onMouseOver) //Add listener for the mouseover event
+       .on("mouseleave", onMouseLeave);
 
-        // function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-        //   d3.select(this).attr('class', 'highlight');
-        //   d3.select(this)
-        //     .transition()
-        //     .duration(500)
-        //     .attr("width", subcatsX.bandwidth()+5)
-        //     .attr("y", function(d) { return subcatsX(d.value)-10;})
-        //     .attr("height", function(d) { return height-yScale(d.value) +10})
-        //   .append("text")
-        //   .attr('class', 'value')
-        //   .attr('x', function(){return subcatsX(d.name)+20;})
-        //   .attr('y', function(){return yScale(d.name)-15;})
-        //   .text(function(){
-        //     return d.NewConfirmed;
-        //   });
-        // }
+        function onMouseOver(d, i){ debugger//d is the info ex: country etc & i is if its the 1st or 2nd ...
+          d3.select(this).attr('class', 'highlight');
+          d3.select(this)
+            .transition()
+            .duration(500)
+            .attr("width", subcatsX.bandwidth()+5)
+            .attr("y", function(d) { 
+              return yScale(d.value)-10;})
+            .attr("height", function(d) { return height-yScale(d.value) +10})
+          .append("text")
+          .attr('class', 'value')
+          .attr('x', function(){return subcatsX(d.name)+20;})
+          .attr('y', function(){return yScale(d.name)-15;})
+          .text(function(){
+            return d.value;
+          });
+        }
 
         // function onMouseLeave(d, i){
         //   d3.select(this).attr('class', 'bar');
@@ -146,13 +170,13 @@ function makebarsg(countries, cat1, cat2){
         //   d3.selectAll('.value')
         //   .remove();
         // }
-
+        //debugger
       var legend = svg.selectAll(".legend")
         .data(subcatsnames.slice().reverse())
         .enter().append("g")
           .attr("class", "legend")
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
+        //  debugger
         legend.append("rect")
           .attr("x", width-30)
           .attr("width", 150)
