@@ -100,6 +100,7 @@ function GetCountries() {
  .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
+      //debugger
       d3.select(this).attr('class', 'highlight');
       d3.select(this)
         .transition()

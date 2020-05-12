@@ -135,13 +135,13 @@ function makebarsg(countries, cat1, cat2){
       .style("fill", function(c){ //debugger 
         return color(c.name);});
 
-
+        debugger
         subsection.selectAll("rect")
         .on("mouseover", onMouseOver) //Add listener for the mouseover event
         .on("mouseleave", onMouseLeave);
 
         function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-        let dd= d3.select(this);
+          let dd= this; //debugger
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -151,13 +151,14 @@ function makebarsg(countries, cat1, cat2){
               return yScale(d.value)-10;})
             .attr("height", function(d) { 
               return height-yScale(d.value) +10;});
-         debugger
+         //debugger
          g.append("text")
           .attr('class', 'value')
           .attr('x', function(){ 
-            debugger/// subcats is grabbing 1st of category but not via the country
-            return subcatsX(g.name)+20;})
-          .attr('y', function(){//debugger
+         //  debugger/// subcats is grabbing 1st of category but not via the country
+            //subcatsnames
+           return subsection.bandwidth()+20;})
+          .attr('y', function(){debugger
             return yScale(d.value)-15;})
           .text(function(){
           //  debugger

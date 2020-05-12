@@ -115,12 +115,19 @@ button{
   height: 10%;
   padding: 1.2%;
   border-radius: 12%;
+  display: inline;
   margin-top: 35%;
   background-color: lemonchiffon;
 }
 
 button:hover{
   background-color: rgb(201, 201, 152);
+}
+#compareform {
+  margin-top: 1.5%;
+  margin-left: 16%;
+  width: 60%;
+
 }
 
 #compareform h2{
@@ -139,6 +146,7 @@ button:hover{
 #compareform .pick{
   margin-left: 39%;
   margin-bottom: 2%;
+  
 }
 #compareform select{
   margin-bottom: 9%;
