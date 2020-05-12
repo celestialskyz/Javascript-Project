@@ -2,13 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" /> 
-    <script src="./dist/main.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <!-- <script src = "d3-transform.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
-    <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="https://d3js.org/topojson.v0.min.js"></script>
     <script src="https://d3js.org/d3-transition.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -36,7 +35,7 @@
     
     <div id="histogram">
       <svg id = "newcases" width="1500" height="600"> </svg>
-          <script src = "src/lib/countries_tally.js" charset="utf-8"> </script>
+          <!-- <script src = "src/lib/countries_tally.js" charset="utf-8"> </script> -->
     </div>
 
 
@@ -62,23 +61,23 @@
           <h3>Create a Graph</h3>
           <h2>Select Categories for comparison:</h2>
           <div class = "pick">
-            <select id = "cat1" name="category" class="cat-drop" default = "NewRecovered"}>
+            <select id = "cat1" name="category" class="cat-drop" default = "NewConfirmed"}>
             </select>
-            <select id = "cat2" name="category2" class="cat-drop" default = "TotalRecovered"}>
+            <select id = "cat2" name="category2" class="cat-drop" default = "NewRecovered"}>
             </select>
           </div>
           </label>
-          <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script>
+          <!-- <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script> -->
           <button id = "buttt" type="submit">Enter</button>
       </form> 
      <div class = "outsite"></div>
       <!-- <script src = "src/lib/testing.js" charset="utf-8"> </script> -->
-      <script src = "src/lib/multibar_map.js" charset="utf-8"> </script>
+      <!-- <script src = "src/lib/multibar_map.js" charset="utf-8"> </script> -->
        <!-- <svg id = "comparecases" width="1500" height="600"> </svg></div> -->
     </div>
 <!--
     <div id="mapgraph"></div>   -->
     <!-- <script src = "src/lib/geomap.js" charset="utf-8"> </script> -->
-
+    <script src="./dist/main.js"></script>
   </body>
 </html>

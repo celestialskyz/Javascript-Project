@@ -1,7 +1,7 @@
 //https://observablehq.com/@d3/learn-d3-by-example?collection=@d3/learn-d3 
-document.addEventListener("DOMContentLoaded", () => {
-  GetCountries();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   GetCountries();
+// });
 
 function GetCountries() {
   const xhr = new XMLHttpRequest();
@@ -39,7 +39,7 @@ function GetCountries() {
 
     var g = svg.append("g").attr("transform", "translate(100 ,100)");
     let y =[];
-    dom = [];
+    let dom = [];
     while (dom.length<8 ){
       let randCon = countries[Math.floor(Math.random() * countries.length)]
       if (randCon.NewConfirmed != 0){
@@ -182,4 +182,4 @@ function GetCountries() {
   //   return colorScale(d.total);
   // });
 
-  
+  export default GetCountries;

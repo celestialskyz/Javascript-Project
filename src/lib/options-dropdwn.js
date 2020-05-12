@@ -1,6 +1,6 @@
 //console.log("JELLO");
 
-document.addEventListener("DOMContentLoaded", () => {
+function createdropdown() {
    
 var select = document.getElementById("cat1");  
 
@@ -23,5 +23,6 @@ var options = ["NewConfirmed","TotalConfirmed","NewDeaths", "TotalDeaths", "NewR
       s.appendChild(el2);}
 
 
-});
+}
 
+export default createdropdown;

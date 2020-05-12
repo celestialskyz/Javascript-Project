@@ -11,7 +11,7 @@ e.preventDefault();
   multiCountries(input1, input2);
 });
 
-function multiCountries(cat1, cat2) {
+function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
   const xhr = new XMLHttpRequest();
 
   // step 2 - specify path and verb
@@ -94,7 +94,7 @@ function makebarsg(countries, cat1, cat2){
 
   xScale.domain(dom.map(d=> { return d.Country;}));
   subcatsX.domain(subcatsnames).range([0, xScale.bandwidth()]);
-  yScale.domain([0, d3.max(y)]);
+  yScale.domain([0, d3.max(y)*1.5]);
   //var g = svg.append("g").attr("transform", "translate(100 ,0)");
   
     var g = svg.append("g");
@@ -135,13 +135,13 @@ function makebarsg(countries, cat1, cat2){
       .style("fill", function(c){ //debugger 
         return color(c.name);});
 
-        debugger
+       ///debugger
         subsection.selectAll("rect")
         .on("mouseover", onMouseOver) //Add listener for the mouseover event
         .on("mouseleave", onMouseLeave);
 
         function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-          let dd= this; //debugger
+           let dd= this; //debugger
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -154,11 +154,14 @@ function makebarsg(countries, cat1, cat2){
          //debugger
          g.append("text")
           .attr('class', 'value')
-          .attr('x', function(){ 
-         //  debugger/// subcats is grabbing 1st of category but not via the country
+          .attr('x', ()=>{ 
+            //debugger/// subcats is grabbing 1st of category but not via the country
             //subcatsnames
-           return subsection.bandwidth()+20;})
-          .attr('y', function(){debugger
+          //  return event.clientX;
+          return event.target.parentElement.transform.baseVal[0].matrix.e;
+          })
+          .attr('y', function(){
+           // debugger
             return yScale(d.value)-15;})
           .text(function(){
           //  debugger
@@ -198,3 +201,5 @@ function makebarsg(countries, cat1, cat2){
           .attr("dy", ".35em")
           .text(function(d){return d;});
  }
+
+ export default multiCountries;
