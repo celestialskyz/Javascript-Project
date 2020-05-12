@@ -141,7 +141,7 @@ function makebarsg(countries, cat1, cat2){
         .on("mouseleave", onMouseLeave);
 
         function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-           let dd= this; //debugger
+           //debugger
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -151,14 +151,16 @@ function makebarsg(countries, cat1, cat2){
               return yScale(d.value)-10;})
             .attr("height", function(d) { 
               return height-yScale(d.value) +10;});
-         //debugger
+          debugger
+          let spot = i;
          g.append("text")
           .attr('class', 'value')
           .attr('x', ()=>{ 
             //debugger/// subcats is grabbing 1st of category but not via the country
             //subcatsnames
-          //  return event.clientX;
-          return event.target.parentElement.transform.baseVal[0].matrix.e;
+            let xpos = event.target.parentElement.transform.baseVal[0].matrix.e;
+            return xpos+ subcatsX(d.name)+15;
+             //  return event.clientX;
           })
           .attr('y', function(){
            // debugger
