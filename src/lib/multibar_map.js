@@ -185,7 +185,7 @@ function makebarsg(countries, cat1, cat2){
         }
         //debugger
       var legend = svg.selectAll(".legend")
-        .data(subcatsnames.slice().reverse())
+        .data(subcatsnames.slice())
         .enter().append("g")
           .attr("class", "legend")
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
