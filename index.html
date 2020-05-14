@@ -32,10 +32,12 @@
       </div>
       <!-- <img class = "firstimg" src = "./dist//images/ICON583.jpg" alt="header"> -->
     </div>
-    
-    <div id="histogram">
-      <svg id = "newcases" width="1500" height="600"> </svg>
-          <!-- <script src = "src/lib/countries_tally.js" charset="utf-8"> </script> -->
+    <div class = "border">
+    <h1 class = "new">Graph of Log(x) Cases by Country</h1>
+  </div>
+    <div id="histogram"> 
+      <!-- <svg id = "newcases" width="1000" height="600"> </svg> -->
+          <!--  <script src = "src/lib/countries_tally.js" charset="utf-8"> </script> -->
     </div>
 
 
@@ -61,8 +63,10 @@
           <h3>Create a Graph</h3>
           <h2>Select Categories for comparison:</h2>
           <div class = "pick">
+            <h4>dark blue:</h4>
             <select id = "cat1" name="category" class="cat-drop" }>
             </select>
+            <h4>light blue:</h4>
             <select id = "cat2" name="category2" class="cat-drop" }>
             </select>
           </div>
@@ -70,6 +74,9 @@
           <!-- <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script> -->
           <button id = "buttt" type="submit">Enter</button>
       </form> 
+      <div class = "border">
+        <h1 class = "new">My Graph: Log(x) Cases by Country</h1>
+      </div>
      <div class = "outsite"></div>
       <!-- <script src = "src/lib/testing.js" charset="utf-8"> </script> -->
       <!-- <script src = "src/lib/multibar_map.js" charset="utf-8"> </script> -->

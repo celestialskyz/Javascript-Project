@@ -53,9 +53,8 @@ body {
 }
 
 #newcases{
-
   margin-top: 5%;
-  margin-left: 8%;
+  margin-left: 3%;
   margin-right: 3%;
   background-color: white;
 }
@@ -154,6 +153,9 @@ button:hover{
 
 #2ndhistogram{
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
 }
 
 .bun{
@@ -161,4 +163,44 @@ button:hover{
   z-index: 2;
   height: 100%;
   width: 40%
+}
+#histogram{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  margin-left: 7%;
+}
+
+#prob, #prob2{
+  margin-top: 1.5%;
+  margin-left: 16%;
+  width: 60%;
+}
+
+.border {
+  border: #3fc19e solid 0.5rem;
+  border-radius: 25%;
+  width: 40%;
+  margin-left: 20%;
+  margin-top: 5%;
+  background-color: rgb(220, 255, 249);
+}
+.head2 h2, .new{
+  font-family: "Fontdiner Swanky";
+    font-size: 1.4em;
+    margin-top: 3%;
+    width: 60%;
+    margin-left: 26%;
+    z-index: 2;
+   
+}
+
+h4 {
+  width: 80%;
+  margin-bottom: 1%;
+}
+
+.outsite {
+  margin-left: 7%;
 }

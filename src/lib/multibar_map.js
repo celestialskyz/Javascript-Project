@@ -19,9 +19,26 @@ function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
 
   // step 3 - register a callback
   xhr.onload = function () {
+    if (xhr.status != 200){
+      //debugger
+      if (document.getElementById("prob2")){
+     } else {
+      var x = document.getElementById("2ndhistogram");
+      let p = document.createElement("p");
+      p.setAttribute("class", "error");
+      p.setAttribute("id", "prob2");
+      x.appendChild(p);
+      var errorpic = document.createElement("img");
+      errorpic.setAttribute("class", "error");
+      errorpic.src = "./src/images/error.jpg";
+      p.appendChild(errorpic);
+      }
+    }
+    else {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
     makebarsg(countries, cat1, cat2);
+    }
   };
 ////debugger
   // step 4 - send off the request with optional data
@@ -30,8 +47,11 @@ function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
 
 function makebarsg(countries, cat1, cat2){
   //debugger
-
-  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
+  if (document.getElementById("prob2")){
+    var error=  document.getElementById("prob2");
+    error.remove();
+ } 
+  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 900).attr("height", 600);
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
@@ -108,11 +128,11 @@ function makebarsg(countries, cat1, cat2){
     .ticks(15)).attr("transform", "translate(50,0)")
     .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 1)
-    .attr("dy", "-4.1em")
+    .attr("y", 12)
+    .attr("dy", "-5.1em")
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
-    .attr("stroke", "black")
+    .attr("stroke", "black") 
     .text("Log Number of Cases");
 
     svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
@@ -129,7 +149,7 @@ function makebarsg(countries, cat1, cat2){
       .enter().append("rect")
       .attr("width", subcatsX.bandwidth())
       .attr("x", function(c) {
-         return subcatsX(c.name);})
+         return subcatsX(c.name)+23;})
       .attr("y", function(c) {return yScale(c.value);})
       .attr("height", function(c){return height-yScale(c.value);})
       .style("fill", function(c){ //debugger 
@@ -151,7 +171,7 @@ function makebarsg(countries, cat1, cat2){
               return yScale(d.value)-10;})
             .attr("height", function(d) { 
               return height-yScale(d.value) +10;});
-          debugger
+          //debugger
           let spot = i;
          g.append("text")
           .attr('class', 'value')
