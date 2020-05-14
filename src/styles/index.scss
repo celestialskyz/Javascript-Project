@@ -205,16 +205,33 @@ h4 {
   margin-left: 7%;
 }
 
-.about{
-  height: 40%;
-}
-
 footer {
   margin-top: 3rem;
-  padding-top: 9rem;
+  padding-top: 4rem;
   padding-bottom: 4.2rem;
   font-size: 1.5rem;
   line-height: 2.7rem;
-
   background-color: rgb(156, 171, 226);
+}
+.about{
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+.about h3{
+  display: flex;
+  justify-content: center;
+}
+.about ul{
+  display: flex;
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about ul li{
+  display: flex;
+  height: 100%;
+  z-index: 6;
+  margin-right: 3%;
 }
