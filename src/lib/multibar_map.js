@@ -149,7 +149,7 @@ function makebarsg(countries, cat1, cat2){
       .enter().append("rect")
       .attr("width", subcatsX.bandwidth())
       .attr("x", function(c) {
-         return subcatsX(c.name)+23;})
+         return subcatsX(c.name)+26;})
       .attr("y", function(c) {return yScale(c.value);})
       .attr("height", function(c){return height-yScale(c.value);})
       .style("fill", function(c){ //debugger 
@@ -179,7 +179,7 @@ function makebarsg(countries, cat1, cat2){
             //debugger/// subcats is grabbing 1st of category but not via the country
             //subcatsnames
             let xpos = event.target.parentElement.transform.baseVal[0].matrix.e;
-            return xpos+ subcatsX(d.name)+15;
+            return xpos+ subcatsX(d.name)+26;
              //  return event.clientX;
           })
           .attr('y', function(){
@@ -197,7 +197,7 @@ function makebarsg(countries, cat1, cat2){
           .transition()
           .duration(500)
           .attr("width", subcatsX.bandwidth())
-          .attr("x", function(c) { return subcatsX(c.name);})
+          .attr("x", function(c) { return subcatsX(c.name)+26;})
           .attr("y", function(c) {return yScale(c.value);})
           .attr("height", function(c){return height-yScale(c.value)})
           d3.selectAll('.value')
