@@ -7,11 +7,12 @@
 With Corona being the top story causing massive shut downs of the global economy and travel bans, I want to create a site that can track the cases with a lighthearted theme & bring some positive quarantine activities to help us all through.
 
 ## Functionality & MVPs 
--bar graph of a random selection of 8 countries’ cases cases.
--interactive and show data points.
--fun suggestions for things to do in quarantine.
--allows you to create your own graph based on chosen x and y parameters.
--double bar graph of all the cases, vs deaths, vs recoveries based on input.
+- bar graph of a random selection of 8 countries’ cases cases.
+- interactive and show data points.
+- fun suggestions for things to do in quarantine.
+- allows you to create your own graph based on chosen x and y parameters.
+- double bar graph of all the cases, vs deaths, vs recoveries based on input.
+- reload image when the API is overloaded with requests
 
 ## Wireframe
 ![](https://openplaybill-seeds.s3.amazonaws.com/FullStackPhotos/wireframs_js.png)
@@ -25,9 +26,11 @@ With Corona being the top story causing massive shut downs of the global economy
 ## Highlighted Features
 ### Bar graph
 The implementation of a graph that dynamically changes as the user hovers over each bar per country. 
+![bargraphDemo](src/images/covidgraph1gif.gif)
 
 ### Double bar graph
 The implementation of a graph that dynamically changes according to user input of X and Y Axes.
+![bargraph2Demo](src/images/covidgraph2gif.gif)
 
 
 ## Implementation Timeline
