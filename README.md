@@ -71,7 +71,7 @@ The second graph works with two different x domains, one for the overall graph a
   subcatsX.domain(subcatsnames).range([0, xScale.bandwidth()]);
   yScale.domain([0, d3.max(y)*1.5]);
 ```
-The section designated for each country's bars are selected and the subcategories are extracted in order to create a bar per subcategory. Each subcategory is given a specific color to differentiate the two bars above the country. 
+The section designated for each country's bars are selected and the subcategories are extracted in order to create a bar per subcategory. Each subcategory is given a specific color to differentiate the two bars above each country. 
 ```
 subsection.selectAll("rect")
       .data(function(c) { 
