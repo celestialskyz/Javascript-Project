@@ -34,7 +34,7 @@ function getCountries() {
 function makebarsg(countries){
  // //debugger
  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
-  debugger
+  //debugger
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 40, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),

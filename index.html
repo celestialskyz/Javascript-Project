@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" /> 
-    <script src="./dist/main.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <!-- <script src = "d3-transform.js"></script> -->
+    <script src="https://kit.fontawesome.com/38b1521e89.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
-    <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="https://d3js.org/topojson.v0.min.js"></script>
     <script src="https://d3js.org/d3-transition.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -20,7 +20,7 @@
 
       <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comfortaa">
-
+      <link rel="icon" href="./src/images/favicon.png" type="image/x-icon">
         <title>Is It Over Yet?</title>
   </head>
   <body>
@@ -33,15 +33,17 @@
       </div>
       <!-- <img class = "firstimg" src = "./dist//images/ICON583.jpg" alt="header"> -->
     </div>
-    
-    <div id="histogram">
-      <svg id = "newcases" width="1500" height="600"> </svg>
-          <script src = "src/lib/countries_tally.js" charset="utf-8"> </script>
+    <div class = "border">
+    <h1 class = "new">Graph of Log(x) Cases by Country</h1>
+  </div>
+    <div id="histogram"> 
+      <!-- <svg id = "newcases" width="1000" height="600"> </svg> -->
+          <!--  <script src = "src/lib/countries_tally.js" charset="utf-8"> </script> -->
     </div>
 
 
 <div class = "Facts">
-   <label> Fun Things to do in Quarentine </label>
+   <label> Fun Things to do in Quarantine </label>
   <img src = "./src/images/bearscovid.jpg">
   <p>
     <ul>
@@ -62,23 +64,50 @@
           <h3>Create a Graph</h3>
           <h2>Select Categories for comparison:</h2>
           <div class = "pick">
-          <select id = "cat1" name="category" class="cat-drop" default = "NewRecovered"}>
-          </select>
-          <select id = "cat2" name="category2" class="cat-drop" default = "TotalRecovered"}>
-          </select>
+            <h4>dark blue:</h4>
+            <select id = "cat1" name="category" class="cat-drop" }>
+            </select>
+            <h4>light blue:</h4>
+            <select id = "cat2" name="category2" class="cat-drop" }>
+            </select>
           </div>
           </label>
-          <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script>
+          <!-- <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script> -->
           <button id = "buttt" type="submit">Enter</button>
       </form> 
+      <div class = "border">
+        <h1 class = "new">My Graph: Log(x) Cases by Country</h1>
+      </div>
      <div class = "outsite"></div>
       <!-- <script src = "src/lib/testing.js" charset="utf-8"> </script> -->
-      <script src = "src/lib/multibar_map.js" charset="utf-8"> </script>
+      <!-- <script src = "src/lib/multibar_map.js" charset="utf-8"> </script> -->
        <!-- <svg id = "comparecases" width="1500" height="600"> </svg></div> -->
     </div>
 <!--
     <div id="mapgraph"></div>   -->
     <!-- <script src = "src/lib/geomap.js" charset="utf-8"> </script> -->
-
+    <script src="./dist/main.js"></script>
+    <footer>
+        <div class = "about">
+          <h3>Lianne Bisch</h3>
+          <ul class="home-social-list">
+            <li>
+                <a href="https://github.com/celestialskyz" target="_blank"> Github <i class="fa fa-github"></i></a>
+            </li>
+            <li> 
+                <a href="https://www.linkedin.com/in/lianne-bisch/" target="_blank">Linkedin <i class="fa fa-linkedin"></i></a>
+            </li>
+            <li> 
+                <a href="https://angel.co/u/lianne-bisch" target="_blank">Angellist <i class="fa fa-angellist"></i></a>
+            </li>
+            <li> 
+                <a href="mailto:lannybys@gmail.com" target="_blank">Email<i class="fa fa-envelope"></i></a>
+            </li>
+        
+          </ul>
+        </div>
+    </footer>
   </body>
+
+   
 </html>

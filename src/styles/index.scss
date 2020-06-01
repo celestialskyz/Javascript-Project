@@ -53,9 +53,8 @@ body {
 }
 
 #newcases{
-
   margin-top: 5%;
-  margin-left: 8%;
+  margin-left: 3%;
   margin-right: 3%;
   background-color: white;
 }
@@ -115,12 +114,19 @@ button{
   height: 10%;
   padding: 1.2%;
   border-radius: 12%;
+  display: inline;
   margin-top: 35%;
   background-color: lemonchiffon;
 }
 
 button:hover{
   background-color: rgb(201, 201, 152);
+}
+#compareform {
+  margin-top: 1.5%;
+  margin-left: 16%;
+  width: 60%;
+
 }
 
 #compareform h2{
@@ -139,6 +145,7 @@ button:hover{
 #compareform .pick{
   margin-left: 39%;
   margin-bottom: 2%;
+  
 }
 #compareform select{
   margin-bottom: 9%;
@@ -146,6 +153,9 @@ button:hover{
 
 #2ndhistogram{
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
 }
 
 .bun{
@@ -153,4 +163,75 @@ button:hover{
   z-index: 2;
   height: 100%;
   width: 40%
+}
+#histogram{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  margin-left: 7%;
+}
+
+#prob, #prob2{
+  margin-top: 1.5%;
+  margin-left: 16%;
+  width: 60%;
+}
+
+.border {
+  border: #3fc19e solid 0.5rem;
+  border-radius: 25%;
+  width: 40%;
+  margin-left: 20%;
+  margin-top: 5%;
+  background-color: rgb(220, 255, 249);
+}
+.head2 h2, .new{
+  font-family: "Fontdiner Swanky";
+    font-size: 1.4em;
+    margin-top: 3%;
+    width: 60%;
+    margin-left: 26%;
+    z-index: 2;
+   
+}
+
+h4 {
+  width: 80%;
+  margin-bottom: 1%;
+}
+
+.outsite {
+  margin-left: 7%;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 4.2rem;
+  font-size: 1.5rem;
+  line-height: 2.7rem;
+  background-color: rgb(156, 171, 226);
+}
+.about{
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+.about h3{
+  display: flex;
+  justify-content: center;
+}
+.about ul{
+  display: flex;
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about ul li{
+  display: flex;
+  height: 100%;
+  z-index: 6;
+  margin-right: 3%;
 }

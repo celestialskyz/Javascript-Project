@@ -1,7 +1,7 @@
 //https://observablehq.com/@d3/learn-d3-by-example?collection=@d3/learn-d3 
-document.addEventListener("DOMContentLoaded", () => {
-  GetCountries();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   GetCountries();
+// });
 
 function GetCountries() {
   const xhr = new XMLHttpRequest();
@@ -14,12 +14,26 @@ function GetCountries() {
     // console.log(xhr.status); //  for status info
     // console.log(xhr.responseType); //the type of data that was returned
     // console.log(xhr.response) //the actual response. For JSON api calls, this will be a JSON string
+   if (xhr.status != 200){
+    //debugger
+    var x = document.getElementById("histogram");
+    let p = document.createElement("p");
+    p.setAttribute("class", "error");
+    p.setAttribute("id", "prob");
+    x.appendChild(p);
+    var errorpic = document.createElement("img");
+    errorpic.setAttribute("class", "error");
+    errorpic.src = "./src/images/error.jpg";
+    p.appendChild(errorpic);
+   }
+   else {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
     graph(countries);
-    
+    }
     //mapit(countries);
   };
+  
 ////debugger
   // step 4 - send off the request with optional data
   xhr.send();
@@ -27,19 +41,23 @@ function GetCountries() {
 
   function graph(countries){
     // console.log("JELLO");
-      var svg = d3.select("#newcases"),
-      margin = 80,
-      width = svg.attr("width")-(3*margin),
-      height= svg.attr("height")-(1.5*margin);
-  // //debugger
-  // var svg = d3.select("svg");
-
+    if (document.getElementById("prob")){
+       var error=  document.getElementById("prob");
+   error.remove();
+    } 
+    
+    d3.select('#histogram').append("svg").attr("id", "newcases").attr("width", 900).attr("height", 600);
+    var svg = d3.select("#newcases"),
+    margin = 80,
+    width = svg.attr("width")-(3*margin),
+    height= svg.attr("height")-(1.5*margin);
     var xScale = d3.scaleBand().range([0, width]).padding(0.2);
     var yScale = d3.scaleLinear().range([height, 0]);
 
     var g = svg.append("g").attr("transform", "translate(100 ,100)");
+    // var g = svg.append("g").attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")")
     let y =[];
-    dom = [];
+    let dom = [];
     while (dom.length<8 ){
       let randCon = countries[Math.floor(Math.random() * countries.length)]
       if (randCon.NewConfirmed != 0){
@@ -100,6 +118,7 @@ function GetCountries() {
  .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
+      //debugger
       d3.select(this).attr('class', 'highlight');
       d3.select(this)
         .transition()
@@ -181,4 +200,4 @@ function GetCountries() {
   //   return colorScale(d.total);
   // });
 
-  
+  export default GetCountries;

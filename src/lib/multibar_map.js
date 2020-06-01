@@ -11,7 +11,7 @@ e.preventDefault();
   multiCountries(input1, input2);
 });
 
-function multiCountries(cat1, cat2) {
+function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
   const xhr = new XMLHttpRequest();
 
   // step 2 - specify path and verb
@@ -19,9 +19,26 @@ function multiCountries(cat1, cat2) {
 
   // step 3 - register a callback
   xhr.onload = function () {
+    if (xhr.status != 200){
+      //debugger
+      if (document.getElementById("prob2")){
+     } else {
+      var x = document.getElementById("2ndhistogram");
+      let p = document.createElement("p");
+      p.setAttribute("class", "error");
+      p.setAttribute("id", "prob2");
+      x.appendChild(p);
+      var errorpic = document.createElement("img");
+      errorpic.setAttribute("class", "error");
+      errorpic.src = "./src/images/error.jpg";
+      p.appendChild(errorpic);
+      }
+    }
+    else {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
     makebarsg(countries, cat1, cat2);
+    }
   };
 ////debugger
   // step 4 - send off the request with optional data
@@ -30,8 +47,11 @@ function multiCountries(cat1, cat2) {
 
 function makebarsg(countries, cat1, cat2){
   //debugger
-
-  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 1500).attr("height", 600);
+  if (document.getElementById("prob2")){
+    var error=  document.getElementById("prob2");
+    error.remove();
+ } 
+  d3.select('.outsite').append("svg").attr("id", "comparecases").attr("width", 900).attr("height", 600);
   var svg = d3.select("#comparecases"),
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
@@ -94,7 +114,7 @@ function makebarsg(countries, cat1, cat2){
 
   xScale.domain(dom.map(d=> { return d.Country;}));
   subcatsX.domain(subcatsnames).range([0, xScale.bandwidth()]);
-  yScale.domain([0, d3.max(y)]);
+  yScale.domain([0, d3.max(y)*1.5]);
   //var g = svg.append("g").attr("transform", "translate(100 ,0)");
   
     var g = svg.append("g");
@@ -108,11 +128,11 @@ function makebarsg(countries, cat1, cat2){
     .ticks(15)).attr("transform", "translate(50,0)")
     .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 1)
-    .attr("dy", "-4.1em")
+    .attr("y", 12)
+    .attr("dy", "-5.1em")
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
-    .attr("stroke", "black")
+    .attr("stroke", "black") 
     .text("Log Number of Cases");
 
     svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
@@ -129,19 +149,19 @@ function makebarsg(countries, cat1, cat2){
       .enter().append("rect")
       .attr("width", subcatsX.bandwidth())
       .attr("x", function(c) {
-         return subcatsX(c.name);})
+         return subcatsX(c.name)+26;})
       .attr("y", function(c) {return yScale(c.value);})
       .attr("height", function(c){return height-yScale(c.value);})
       .style("fill", function(c){ //debugger 
         return color(c.name);});
 
-
+       ///debugger
         subsection.selectAll("rect")
         .on("mouseover", onMouseOver) //Add listener for the mouseover event
         .on("mouseleave", onMouseLeave);
 
         function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-        let dd= d3.select(this);
+           //debugger
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -151,13 +171,19 @@ function makebarsg(countries, cat1, cat2){
               return yScale(d.value)-10;})
             .attr("height", function(d) { 
               return height-yScale(d.value) +10;});
-         debugger
+          //debugger
+          let spot = i;
          g.append("text")
           .attr('class', 'value')
-          .attr('x', function(){ 
-            debugger/// subcats is grabbing 1st of category but not via the country
-            return subcatsX(g.name)+20;})
-          .attr('y', function(){//debugger
+          .attr('x', ()=>{ 
+            //debugger/// subcats is grabbing 1st of category but not via the country
+            //subcatsnames
+            let xpos = event.target.parentElement.transform.baseVal[0].matrix.e;
+            return xpos+ subcatsX(d.name)+26;
+             //  return event.clientX;
+          })
+          .attr('y', function(){
+           // debugger
             return yScale(d.value)-15;})
           .text(function(){
           //  debugger
@@ -171,7 +197,7 @@ function makebarsg(countries, cat1, cat2){
           .transition()
           .duration(500)
           .attr("width", subcatsX.bandwidth())
-          .attr("x", function(c) { return subcatsX(c.name);})
+          .attr("x", function(c) { return subcatsX(c.name)+26;})
           .attr("y", function(c) {return yScale(c.value);})
           .attr("height", function(c){return height-yScale(c.value)})
           d3.selectAll('.value')
@@ -179,7 +205,7 @@ function makebarsg(countries, cat1, cat2){
         }
         //debugger
       var legend = svg.selectAll(".legend")
-        .data(subcatsnames.slice().reverse())
+        .data(subcatsnames.slice())
         .enter().append("g")
           .attr("class", "legend")
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
@@ -197,3 +223,5 @@ function makebarsg(countries, cat1, cat2){
           .attr("dy", ".35em")
           .text(function(d){return d;});
  }
+
+ export default multiCountries;
