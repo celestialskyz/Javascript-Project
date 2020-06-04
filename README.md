@@ -19,7 +19,8 @@ With Corona being the top story causing massive shut downs of the global economy
 
 ## API and Tech
 * CORONAVIRUS COVID19 API
-* D3 JS Library
+* D3
+* JS Library
 * HTML 
 * CSS 
 
