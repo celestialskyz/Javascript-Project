@@ -2,10 +2,30 @@
 // document.addEventListener("DOMContentLoaded", () => {
 //   GetCountries();
 // });
+document.getElementById('countrytop').addEventListener('click', function (e) {
+  e.preventDefault();
+  debugger
+    d3.selectAll('#newcases').remove();  
+    debugger
+    GetCountries("countrytop");
+  });
+document.getElementById('countrybottom').addEventListener('click', function (e) {
+  debugger
+  e.preventDefault();
+  debugger
+  d3.selectAll('#newcases').remove();  
+  GetCountries("countrybottom");
+});
+document.getElementById('countryrandom').addEventListener('click', function (e) {
+  e.preventDefault();
+  debugger
+    d3.selectAll('#newcases').remove();  
+    GetCountries("countryrandom");
+  });
 
-function GetCountries() {
+function GetCountries(buttonchoice = "countryrandom") {
   const xhr = new XMLHttpRequest();
-
+debugger
   // step 2 - specify path and verb
   xhr.open('GET', 'https://api.covid19api.com/summary');
 
@@ -29,7 +49,7 @@ function GetCountries() {
    else {
     const info = JSON.parse(xhr.response);
     const countries = info.Countries;
-    graph(countries);
+    graph(countries, buttonchoice);
     }
     //mapit(countries);
   };
@@ -38,12 +58,31 @@ function GetCountries() {
   // step 4 - send off the request with optional data
   xhr.send();
 }
+function sorter (el, pivot){
+  if (el.NewConfirmed < pivot.NewConfirmed){ 
+    return - 1;
+  }
+  return 1;
+}
 
-  function graph(countries){
+function sort(array){
+  if (array.length < 2) return array;
+  const pivot = array[0];
+  let left = array.slice(1).filter((el) => sorter(el, pivot) === -1 && el.NewConfirmed !=0);
+  let right = array.slice(1).filter((el) => sorter(el, pivot) !== -1 && el.NewConfirmed !=0);
+  left = sort(left);
+  right = sort(right);
+
+  return left.concat([pivot]).concat(right);
+}
+
+
+  function graph(countries, buttonchoice){
+    debugger
     // console.log("JELLO");
     if (document.getElementById("prob")){
        var error=  document.getElementById("prob");
-   error.remove();
+      error.remove();
     } 
     
     d3.select('#histogram').append("svg").attr("id", "newcases").attr("width", 900).attr("height", 600);
@@ -57,22 +96,65 @@ function GetCountries() {
     var g = svg.append("g").attr("transform", "translate(100 ,100)");
     // var g = svg.append("g").attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")")
     let y =[];
+    let sorted = sort(countries);
     let dom = [];
+  if (buttonchoice === "countrytop"){
+     sorted.slice(-8).forEach(c => {
+      dom.push(c);
+     });
+  }
+  else if (buttonchoice === "countrybottom"){
+    debugger
+    sorted.slice(0,7).forEach(c => {
+      dom.push(c);
+     });
+  }
+  else {
+    debugger
     while (dom.length<8 ){
+      debugger
       let randCon = countries[Math.floor(Math.random() * countries.length)]
       if (randCon.NewConfirmed != 0){
         dom.push(randCon);
       }
     }
+  }
+  let label = [];
+  debugger
+  if (buttonchoice !== "countrybottom"){
     dom.forEach(c => {
       y.push(Math.log(c.NewConfirmed));
-    });
-
-    //debugger
+      c.NewConfirmed = (Math.log(c.NewConfirmed));
+      debugger
+  });
+    label.push("Graph of Log(x) Cases by Country");
+  } else {
+    dom.forEach(c => {
+      y.push(c.NewConfirmed);
+      c.NewConfirmed = c.NewConfirmed;
+      debugger
+    label.push("Graph of Cases by Country");
+  });}
   
+  var newDiv = document.createElement("div"); 
+  
+    debugger
+    if(buttonchoice !== "countrybottom"){  
+      var newContent = document.createTextNode("Graph of X Cases by Country"); 
+      newDiv.appendChild(newContent); 
+      newDiv.setAttribute("id","newC");
+      document.getElementById("newC").replaceWith(newDiv);
+    }
+    else {
+      var newContent = document.createTextNode("Graph of Log(x) Cases by Country"); 
+      newDiv.appendChild(newContent); 
+      newDiv.setAttribute("id","newC");
+      document.getElementById("newC").replaceWith(newDiv);
+    }
     xScale.domain(dom.map(d=> { return d.Country;}));
+    debugger
     yScale.domain([0, d3.max(y)]);
-    // //debugger
+    debugger
     g.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xScale))
@@ -101,9 +183,9 @@ function GetCountries() {
     .enter().append("rect")
     .attr("class", "bar")
     .attr("x", function(d) { return xScale(d.Country); })
-    .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4)); })
+    .attr("y", function(d) { return yScale((d.NewConfirmed).toFixed(4)); })
     .attr("width", xScale.bandwidth())
-    .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)); });
+    .attr("height", function(d) { return height - yScale((d.NewConfirmed).toFixed(4)); });
     // //debugger
   //   svg.append("text")
   //  .attr("transform", "translate(100,0)")
@@ -114,8 +196,8 @@ function GetCountries() {
   //  .attr("height", function(d) { return height ; });
    
    g.selectAll(".bar")
-   .on("mouseover", onMouseOver) //Add listener for the mouseover event
- .on("mouseleave", onMouseLeave);
+    .on("mouseover", onMouseOver) //Add listener for the mouseover event
+    .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
       //debugger
@@ -124,15 +206,15 @@ function GetCountries() {
         .transition()
         .duration(500)
         .attr("width", xScale.bandwidth()+5)
-        .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4))-10; })
-        .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)) +10; });
+        .attr("y", function(d) { return yScale((d.NewConfirmed).toFixed(4))-10; })
+        .attr("height", function(d) { return height - yScale((d.NewConfirmed).toFixed(4)) +10; });
      //  debugger
       g.append("text")
       .attr('class', 'value')
       .attr('x', function(){return xScale(d.Country)+20})
-      .attr('y', function(){return yScale(Math.log(d.NewConfirmed).toFixed(4))-15;})
+      .attr('y', function(){return yScale((d.NewConfirmed).toFixed(4))-15;})
       .text(function(){
-        return Math.log(d.NewConfirmed).toFixed(4);
+        return (d.NewConfirmed).toFixed(4);
       });
     }
 //debugger
@@ -142,8 +224,8 @@ function GetCountries() {
       .transition()
       .duration(500)
       .attr("width", xScale.bandwidth())
-      .attr("y", function(d) { return yScale(Math.log(d.NewConfirmed).toFixed(4)); })
-      .attr("height", function(d) { return height - yScale(Math.log(d.NewConfirmed).toFixed(4)); });
+      .attr("y", function(d) { return yScale((d.NewConfirmed).toFixed(4)); })
+      .attr("height", function(d) { return height - yScale((d.NewConfirmed).toFixed(4)); });
       d3.selectAll('.value')
       .remove();
     }
