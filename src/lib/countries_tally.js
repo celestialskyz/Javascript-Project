@@ -78,7 +78,6 @@ function sort(array){
 
 
   function graph(countries, buttonchoice){
-    debugger
     // console.log("JELLO");
     if (document.getElementById("prob")){
        var error=  document.getElementById("prob");
@@ -98,34 +97,36 @@ function sort(array){
     let y =[];
     let sorted = sort(countries);
     let dom = [];
+    let label = ["Log Number of Cases", "Number of Cases"];
+    let x = 0;
+
   if (buttonchoice === "countrytop"){
      sorted.slice(-8).forEach(c => {
       dom.push(c);
+      x++;
      });
   }
   else if (buttonchoice === "countrybottom"){
-    debugger
     sorted.slice(0,7).forEach(c => {
       dom.push(c);
      });
   }
   else {
-    debugger
+  
     while (dom.length<8 ){
-      debugger
+    
       let randCon = countries[Math.floor(Math.random() * countries.length)]
       if (randCon.NewConfirmed != 0){
         dom.push(randCon);
       }
     }
   }
-  let label = [];
-  debugger
+  
   if (buttonchoice !== "countrybottom"){
     dom.forEach(c => {
       y.push(Math.log(c.NewConfirmed));
       c.NewConfirmed = (Math.log(c.NewConfirmed));
-      debugger
+      
   });
     label.push("Graph of Log(x) Cases by Country");
   } else {
@@ -140,21 +141,23 @@ function sort(array){
   
     debugger
     if(buttonchoice !== "countrybottom"){  
-      var newContent = document.createTextNode("Graph of X Cases by Country"); 
-      newDiv.appendChild(newContent); 
-      newDiv.setAttribute("id","newC");
-      document.getElementById("newC").replaceWith(newDiv);
-    }
-    else {
+      debugger
       var newContent = document.createTextNode("Graph of Log(x) Cases by Country"); 
       newDiv.appendChild(newContent); 
       newDiv.setAttribute("id","newC");
       document.getElementById("newC").replaceWith(newDiv);
     }
+    else {
+      debugger
+      var newContent = document.createTextNode("Graph of X Cases by Country"); 
+      newDiv.appendChild(newContent); 
+      newDiv.setAttribute("id","newC");
+      document.getElementById("newC").replaceWith(newDiv);
+    }
     xScale.domain(dom.map(d=> { return d.Country;}));
-    debugger
+    
     yScale.domain([0, d3.max(y)]);
-    debugger
+    
     g.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xScale))
@@ -176,7 +179,7 @@ function sort(array){
     .attr("dx", "-19.1em")
     .attr("text-anchor", "end")
     .attr("stroke", "black")
-    .text("Log Number of Cases");
+    .text(`${label[x]}`);
 
     g.selectAll(".bar")
     .data(dom)
