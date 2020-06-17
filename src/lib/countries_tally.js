@@ -4,28 +4,26 @@
 // });
 document.getElementById('countrytop').addEventListener('click', function (e) {
   e.preventDefault();
-  debugger
+
     d3.selectAll('#newcases').remove();  
-    debugger
     GetCountries("countrytop");
   });
 document.getElementById('countrybottom').addEventListener('click', function (e) {
-  debugger
+
   e.preventDefault();
-  debugger
+
   d3.selectAll('#newcases').remove();  
   GetCountries("countrybottom");
 });
 document.getElementById('countryrandom').addEventListener('click', function (e) {
   e.preventDefault();
-  debugger
+
     d3.selectAll('#newcases').remove();  
     GetCountries("countryrandom");
   });
 
 function GetCountries(buttonchoice = "countryrandom") {
   const xhr = new XMLHttpRequest();
-debugger
   // step 2 - specify path and verb
   xhr.open('GET', 'https://api.covid19api.com/summary');
 
@@ -35,7 +33,7 @@ debugger
     // console.log(xhr.responseType); //the type of data that was returned
     // console.log(xhr.response) //the actual response. For JSON api calls, this will be a JSON string
    if (xhr.status != 200){
-    //debugger
+  
     var x = document.getElementById("histogram");
     let p = document.createElement("p");
     p.setAttribute("class", "error");
@@ -54,7 +52,7 @@ debugger
     //mapit(countries);
   };
   
-////debugger
+///
   // step 4 - send off the request with optional data
   xhr.send();
 }
@@ -133,22 +131,22 @@ function sort(array){
     dom.forEach(c => {
       y.push(c.NewConfirmed);
       c.NewConfirmed = c.NewConfirmed;
-      debugger
+    
     label.push("Graph of Cases by Country");
   });}
   
   var newDiv = document.createElement("div"); 
   
-    debugger
+  
     if(buttonchoice !== "countrybottom"){  
-      debugger
+    
       var newContent = document.createTextNode("Graph of Log(x) Cases by Country"); 
       newDiv.appendChild(newContent); 
       newDiv.setAttribute("id","newC");
       document.getElementById("newC").replaceWith(newDiv);
     }
     else {
-      debugger
+    
       var newContent = document.createTextNode("Graph of X Cases by Country"); 
       newDiv.appendChild(newContent); 
       newDiv.setAttribute("id","newC");
@@ -167,7 +165,7 @@ function sort(array){
     .attr("text-anchor", "end")
     .attr("stroke", "black")
     .text("Countries");
-    // //debugger;
+    // /;
 
     g.append("g").call(d3.axisLeft(yScale).tickFormat(function(d){
       return d;
@@ -189,7 +187,7 @@ function sort(array){
     .attr("y", function(d) { return yScale((d.NewConfirmed).toFixed(4)); })
     .attr("width", xScale.bandwidth())
     .attr("height", function(d) { return height - yScale((d.NewConfirmed).toFixed(4)); });
-    // //debugger
+    // /
   //   svg.append("text")
   //  .attr("transform", "translate(100,0)")
   //  .attr("x", 50)
@@ -203,7 +201,6 @@ function sort(array){
     .on("mouseleave", onMouseLeave);
 
     function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-      //debugger
       d3.select(this).attr('class', 'highlight');
       d3.select(this)
         .transition()
@@ -211,7 +208,7 @@ function sort(array){
         .attr("width", xScale.bandwidth()+5)
         .attr("y", function(d) { return yScale((d.NewConfirmed).toFixed(4))-10; })
         .attr("height", function(d) { return height - yScale((d.NewConfirmed).toFixed(4)) +10; });
-     //  debugger
+     // 
       g.append("text")
       .attr('class', 'value')
       .attr('x', function(){return xScale(d.Country)+20})
@@ -220,7 +217,7 @@ function sort(array){
         return (d.NewConfirmed).toFixed(4);
       });
     }
-//debugger
+
     function onMouseLeave(d, i){
       d3.select(this).attr('class', 'bar');
       d3.select(this)
@@ -236,10 +233,10 @@ function sort(array){
 
   }
   function mapit(countries){
- // //debugger
+ // /
       var width = 1000;
       var height = 580;
-    //  //debugger
+    //  /
     //   // Create SVG
       var svg = d3.select('#mapgraph')
           .append( "svg" )
@@ -253,7 +250,7 @@ function sort(array){
      .translate([width/2, height/2]);
     
       var data = d3.map();
-      // //debugger
+      // /
       var colorScale = d3.scaleThreshold()
       .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
       .range(d3.schemeBlues[8]);
@@ -267,7 +264,7 @@ function sort(array){
     
       var path = d3.geoPath().projection(projection);
       d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(error, topology) {
-        ////debugger 
+        /// 
           g.selectAll("path")
           .data(topology.features)
           .enter()
