@@ -101,25 +101,24 @@ function sort(array){
   if (buttonchoice === "countrytop"){
      sorted.slice(-8).forEach(c => {
       dom.push(c);
-      x++;
      });
   }
   else if (buttonchoice === "countrybottom"){
+    x++;
     sorted.slice(0,7).forEach(c => {
       dom.push(c);
      });
   }
   else {
-  
     while (dom.length<8 ){
-    
       let randCon = countries[Math.floor(Math.random() * countries.length)]
       if (randCon.NewConfirmed != 0){
         dom.push(randCon);
       }
     }
   }
-  
+
+  debugger
   if (buttonchoice !== "countrybottom"){
     dom.forEach(c => {
       y.push(Math.log(c.NewConfirmed));
