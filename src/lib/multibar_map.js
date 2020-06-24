@@ -4,7 +4,7 @@
 document.getElementById('buttt').addEventListener('click', function (e) {
 e.preventDefault();
   d3.selectAll('.show').remove();
-  //debugger
+  
   let input1 = document.getElementById("cat1").value;
   let input2 = document.getElementById("cat2").value;
   
@@ -20,7 +20,7 @@ function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
   // step 3 - register a callback
   xhr.onload = function () {
     if (xhr.status != 200){
-      //debugger
+      
       if (document.getElementById("prob2")){
      } else {
       var x = document.getElementById("2ndhistogram");
@@ -40,13 +40,13 @@ function multiCountries(cat1="NewConfirmed", cat2= "NewRecovered") {
     makebarsg(countries, cat1, cat2);
     }
   };
-////debugger
+//
   // step 4 - send off the request with optional data
   xhr.send();
 }
 
 function makebarsg(countries, cat1, cat2){
-  //debugger
+  
   if (document.getElementById("prob2")){
     var error=  document.getElementById("prob2");
     error.remove();
@@ -56,7 +56,7 @@ function makebarsg(countries, cat1, cat2){
   margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = svg.attr("width")-(margin.left + (2*margin.right)),
   height= svg.attr("height")-(1.5*margin.top + margin.bottom);
-//debugger
+
   svg.attr('class', 'show');
 
   var xScale = d3.scaleBand().rangeRound([20, width]).padding(0.2);
@@ -75,11 +75,11 @@ function makebarsg(countries, cat1, cat2){
   // let subcatsnames = ["TotalConfirmed","NewRecovered", "TotalRecovered"];
    let subcatsnames = [cat1, cat2];
 
-  ////debugger
+  //
   let y =[];
-     ////debugger
+     //
     //let dom = countries.filter(d=> { if (d.NewConfirmed> 2000) return d.NewConfirmed;});
-    //debugger
+    
     let dom =[];
     while (dom.length<8 ){
       let randCon = countries[Math.floor(Math.random() * countries.length)];
@@ -88,10 +88,10 @@ function makebarsg(countries, cat1, cat2){
        }
       
     }
-//debugger
+
     dom.forEach(c => {
       y.push(Math.log(c[`${cat1}`])).toFixed(4);
-      ////debugger
+      //
       y.push(Math.log(c[`${cat2}`])).toFixed(4);}
      );
      
@@ -109,7 +109,7 @@ function makebarsg(countries, cat1, cat2){
       },
         {name:cat2, value: logsC2 }];
           // Math.log(c[`${cat2}`])}]; 
-         ////debugger
+         //
      });
 
   xScale.domain(dom.map(d=> { return d.Country;}));
@@ -152,16 +152,16 @@ function makebarsg(countries, cat1, cat2){
          return subcatsX(c.name)+26;})
       .attr("y", function(c) {return yScale(c.value);})
       .attr("height", function(c){return height-yScale(c.value);})
-      .style("fill", function(c){ //debugger 
+      .style("fill", function(c){  
         return color(c.name);});
 
-       ///debugger
+       
         subsection.selectAll("rect")
         .on("mouseover", onMouseOver) //Add listener for the mouseover event
         .on("mouseleave", onMouseLeave);
 
         function onMouseOver(d, i){ //d is the info ex: country etc & i is if its the 1st or 2nd ...
-           //debugger
+           
           d3.select(this).attr('class', 'highlight');
           d3.select(this)
             .transition()
@@ -171,12 +171,12 @@ function makebarsg(countries, cat1, cat2){
               return yScale(d.value)-10;})
             .attr("height", function(d) { 
               return height-yScale(d.value) +10;});
-          //debugger
+          
           let spot = i;
          g.append("text")
           .attr('class', 'value')
           .attr('x', ()=>{ 
-            //debugger/// subcats is grabbing 1st of category but not via the country
+            /// subcats is grabbing 1st of category but not via the country
             //subcatsnames
             let xpos = event.target.parentElement.transform.baseVal[0].matrix.e;
             return xpos+ subcatsX(d.name)+26;
@@ -203,7 +203,7 @@ function makebarsg(countries, cat1, cat2){
           d3.selectAll('.value')
           .remove();
         }
-        //debugger
+        
       var legend = svg.selectAll(".legend")
         .data(subcatsnames.slice())
         .enter().append("g")

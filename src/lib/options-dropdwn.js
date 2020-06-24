@@ -21,7 +21,6 @@ function createdropdown() {
         var opt2 = options[i2];
         var el2 = document.createElement("option");
         el2.textContent = opt2;
-      //  //debugger
         el2.value = opt2;
         s.appendChild(el2);}
 }
