@@ -9,7 +9,10 @@
 
 #comparecases{
   margin-top: 3%;
+  padding-top: 3%;
   background-color: white;
+  padding-right: 2%;
+  padding-left: 2%;
 }
 
 body {
@@ -237,3 +240,17 @@ footer {
   margin-bottom: 5%;
   margin-left: 18%;
 }
+
+.header-main-nav {
+  justify-content: center;
+  display: flex;
+  margin-top: 8%;
+  border-radius: 9px;
+}
+
+.header-main-nav li{
+  padding: 12px;
+  border: white solid 3px;
+  background-color: rgb(155, 245, 196);
+}
+
