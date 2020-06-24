@@ -118,7 +118,7 @@ function sort(array){
     }
   }
 
-  debugger
+  // debugger
   if (buttonchoice !== "countrybottom"){
     dom.forEach(c => {
       y.push(Math.log(c.NewConfirmed));
