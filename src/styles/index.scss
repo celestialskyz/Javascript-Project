@@ -116,11 +116,12 @@ button{
   border-radius: 12%;
   display: inline;
   margin-top: 35%;
+  border: rgb(247, 247, 151) solid 2px;
   background-color: lemonchiffon;
 }
 
 button:hover{
-  background-color: rgb(201, 201, 152);
+  background-color: rgb(221, 221, 169);
 }
 #compareform {
   margin-top: 1.5%;
@@ -254,3 +255,6 @@ footer {
   background-color: rgb(155, 245, 196);
 }
 
+.header-main-nav li:hover{
+  background-color: rgb(176, 220, 190);
+}
