@@ -165,6 +165,9 @@ button:hover{
   flex-direction: column;
   z-index: 1;
 }
+.country-drop{
+  margin-right: 5%;
+}
 
 #prob, #prob2{
   margin-top: 1.5%;
@@ -191,6 +194,10 @@ button:hover{
     margin-left: 26%;
     z-index: 2;
    
+}
+
+.choose1{
+  margin-left: 18%;
 }
 
 h4 {
@@ -238,10 +245,15 @@ footer {
   z-index: 1;
 }
 
-.choose{
+.choose, .choose1{
   margin-top: -20%;
   margin-bottom: 5%;
-  margin-left: 18%;
+  display: flex;
+}
+
+
+.choose >.country2-drop{
+  margin-right: 5%;
 }
 
 .header-main-nav {

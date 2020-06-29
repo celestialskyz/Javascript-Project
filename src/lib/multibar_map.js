@@ -196,7 +196,7 @@ function makebarsg(countries, cat1, cat2, buttonchoice){
         newDiv.setAttribute("id","newG2");
         document.getElementById("newG2").replaceWith(newDiv);
       }
-    debugger
+    
 
 
   xScale.domain(dom.map(d=> { return d.Country;}));
@@ -223,7 +223,7 @@ function makebarsg(countries, cat1, cat2, buttonchoice){
     .text(`${label[x]}`);
 
     svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
-// debugger
+// 
     var subsection = svg.selectAll(".subsection")
       .data(dom)
       .enter().append("g")
@@ -270,10 +270,10 @@ function makebarsg(countries, cat1, cat2, buttonchoice){
              //  return event.clientX;
           })
           .attr('y', function(){
-           // debugger
+           // 
             return yScale(d.value)-15;})
           .text(function(){
-          //  debugger
+          //  
             return d.value;
           });
         }
@@ -296,7 +296,7 @@ function makebarsg(countries, cat1, cat2, buttonchoice){
         .enter().append("g")
           .attr("class", "legend")
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-        //  debugger
+        //  
         legend.append("rect")
           .attr("x", width-30)
           .attr("width", 150)
