@@ -31,9 +31,9 @@
             With Corona Virus(Covid-19) taking over the news and causing a global pandemic. The given statistics can help you track cases, get quarantine activity suggestions and decide when we can come out of hiding.
         </div>
         <ul class="header-main-nav">
-          <li class="current"><a class="smoothscroll"  href="#earthform" title="earthform">First Graph</a></li>
+          <li class="current"><a class="smoothscroll"  href="#earthform" title="earthform">Graph of New Cases</a></li>
           <li><a class="smoothscroll"  href="#Facts" title="Facts">Fun Facts</a></li>
-          <li><a class="smoothscroll"  href="#2ndhistogram" title="2ndhistogram">Second Graph</a></li>
+          <li><a class="smoothscroll"  href="#2ndhistogram" title="2ndhistogram">Comparison Graph</a></li>
         </ul>
       </div>
       <!-- <img class = "firstimg" src = "./dist//images/ICON583.jpg" alt="header"> -->
@@ -92,14 +92,31 @@
           <!-- <script src = "src/lib/options-dropdwn.js" charset="utf-8"> </script> -->
           <button id = "buttt" type="submit">Enter</button>
       </form> 
+
       <div class = "border">
-        <h1 class = "new">My Graph: Log(x) Cases by Country</h1>
+        <h1 class = "new"><div id = "newG2"></div></h1>
       </div>
      <div class = "outsite"></div>
+
+     
       <!-- <script src = "src/lib/testing.js" charset="utf-8"> </script> -->
       <!-- <script src = "src/lib/multibar_map.js" charset="utf-8"> </script> -->
        <!-- <svg id = "comparecases" width="1500" height="600"> </svg></div> -->
-    </div>
+   
+       <form id = "graph2countriesform"> 
+        <!-- <img class = "EarthCovid" src = "./src/images/EarthCovid.jpg"> -->
+          <div class = "choose">
+            <button id = "graph2top" name="graph2top" class="country2-drop" }><div>Top Number of Cases</div>
+            </button>
+            <button id = "graph2bottom" name="graph2bottom" class="country2-drop" }> <div>Lowest Number of Cases Over Zero</div>
+            </button>
+            <button id = "random" name="random" class="country2-drop" }><div>Random 8 Countries</div>
+            </button>
+          </div>
+      </form>
+
+   
+      </div>
 <!--
     <div id="mapgraph"></div>   -->
     <!-- <script src = "src/lib/geomap.js" charset="utf-8"> </script> -->

@@ -125,32 +125,31 @@ function sort(array){
       c.NewConfirmed = (Math.log(c.NewConfirmed));
       
   });
-    label.push("Graph of Log(x) Cases by Country");
+    // label.push("Graph of Log(x) Cases by Country");
   } else {
     dom.forEach(c => {
       y.push(c.NewConfirmed);
       c.NewConfirmed = c.NewConfirmed;
     
-    label.push("Graph of Cases by Country");
+    // label.push("Graph of Cases by Country");
   });}
   
   var newDiv = document.createElement("div"); 
   
   
     if(buttonchoice !== "countrybottom"){  
-    
       var newContent = document.createTextNode("Graph of Log(x) Cases by Country"); 
       newDiv.appendChild(newContent); 
       newDiv.setAttribute("id","newC");
       document.getElementById("newC").replaceWith(newDiv);
     }
     else {
-    
       var newContent = document.createTextNode("Graph of X Cases by Country"); 
       newDiv.appendChild(newContent); 
       newDiv.setAttribute("id","newC");
       document.getElementById("newC").replaceWith(newDiv);
     }
+
     xScale.domain(dom.map(d=> { return d.Country;}));
     
     yScale.domain([0, d3.max(y)]);
